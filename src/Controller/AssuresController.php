@@ -13,32 +13,30 @@ final class AssuresController extends AbstractController
     
      // Route pour la page de login
     #[Route('/login', name: 'app_assures_login')]
-<<<<<<< HEAD
     public function index(Request $request): Response      
-=======
-    public function index(): Response
->>>>>>> 748b6f16f7026ce49ef5c64a0e0c1d2bcf91081b
     {
-        $titre = "Connexion";
+        
+        // Récupération des paramètres GET nom et prenom avec des valeurs par défaut
+        $nom = "moussa";
+        $prenom = "ali";
+        $role = "admin";
        
-        return $this->render('login.html.twig', [
-             'titre' => $titre
-         ]);
+
+        //Retourne une réponse 
+         /*return $this->render('premier_symfony/index.html.twig', [
+             'nom' => $nom,
+             'prenom' => $prenom,                                                                                                                             
+             'role' => $role
+         ]); */
+
+         return new Response();
     }
 
     // Route pour la page du tableau de bord
     #[Route('/dashboard', name: 'dashBoard')]
     public function dashBord(): Response
     {
-        $nom = "moussa";
-        $prenom = "ali";
-        $role = "admin";
-       
-        return $this->render('premier_symfony/dashboard.html.twig', [
-             'nom' => $nom,
-             'prenom' => $prenom,                                                                                                                             
-             'role' => $role
-         ]);
+       // return $this->render('dashboard/index.html.twig');
+       return new Response();
     }       
 }
-
