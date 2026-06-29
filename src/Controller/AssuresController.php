@@ -13,7 +13,7 @@ final class AssuresController extends AbstractController
     
      // Route pour la page de login
     #[Route('/login', name: 'app_assures_login')]
-    public function index(Request $request): Response
+    public function index(Request $request): Response      
     {
         
         // Récupération des paramètres GET nom et prenom avec des valeurs par défaut
