@@ -15,6 +15,7 @@ class Coordonnee
     private ?string $dateNaissance = null;
     private ?string $lieuNaissance = null;
     private ?string $addresse = null;
+    private ?string $addresseComplete = null;         
     private ?string $dateFinJOD = null;
     private ?string $source;
 
@@ -48,7 +49,7 @@ class Coordonnee
         return $this->prenom;
     }
     public function setPrenom(string $prenom){
-        $this->prenom = $nom;
+        $this->prenom = $prenom;
         return $this;
     }
     public function getDateNaissance(){
@@ -63,6 +64,20 @@ class Coordonnee
     }
     public function setLieuNaissance(string $lieuNaissance){
         $this->lieuNaissance = $lieuNaissance;
+        return $this;
+    }
+    public function getAddresse(){
+        return $this->addresse;
+    }
+    public function setAddresse(string $addresse){
+        $this->addresse = $addresse;
+        return $this;
+    }
+    public function getAddresseComplete(){
+        return $this->addresseComplete;
+    }
+    public function setAddresseComplete(string $addresseComplete){
+        $this->addresseComplete = $addresseComplete;
         return $this;
     }
     public function getDateFinJOD(){
@@ -84,4 +99,4 @@ class Coordonnee
 
 }
 
-?>
+?> 
