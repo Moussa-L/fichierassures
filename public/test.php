@@ -1,7 +1,7 @@
 <?php
 
 $serverName = "55.38.4.121";
-<<<<<<< HEAD
+
 $connectionOptions = [
     "Database" => "assures",
     "Uid" => "lidya",
@@ -16,7 +16,7 @@ if ($conn) {
     echo "Erreur de connexion :\n";
     print_r(sqlsrv_errors());
 }
-=======
+
 $conenectionOptions = [
     "Database" => "assures",
     "Uid" => "bounou",
@@ -31,4 +31,3 @@ if ($conn) {
     echo "Erreur de connexion : \n";
     print_r(sqlsrv_errors());
 }
->>>>>>> 748b6f16f7026ce49ef5c64a0e0c1d2bcf91081b
