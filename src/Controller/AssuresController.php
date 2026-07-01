@@ -16,11 +16,17 @@ final class AssuresController extends AbstractController
     public function index(Request $request): Response      
     {
         
-        // Récupération des paramètres GET nom et prenom avec des valeurs par défaut
+    //ici je vais recupere les $users et renvoyer a la view.
+
+    
+
+
+
+        /* Récupération des paramètres GET nom et prenom avec des valeurs par défaut
         $nom = "moussa";
         $prenom = "ali";
         $role = "admin";
-       
+       */
 
         //Retourne une réponse 
          /*return $this->render('premier_symfony/index.html.twig', [

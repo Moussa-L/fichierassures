@@ -10,7 +10,11 @@ class Users
     private ?string $nomPrenom = null;
     private ?string $password = null;
 
-    public function __construct (){
+    public function __construct (string $numAgent, string $nomPrenom, string $password)
+    {
+        $this->numAgent = $numAgent;
+        $this->nomPrenom = $nomPrenom;
+        $this->password = $password;
 
     }
 
@@ -40,6 +44,8 @@ class Users
         $this->password = $password;
         return $this;
     }
+
+    public
 
 
 }
