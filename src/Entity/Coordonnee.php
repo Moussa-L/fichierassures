@@ -95,8 +95,6 @@ class Coordonnee
         return $this;
     }
 
-
-
 }
 
 ?> 
