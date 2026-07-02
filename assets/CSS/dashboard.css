@@ -1,0 +1,41 @@
+body {
+    background-color: rgb(117, 245, 245);
+}
+
+.navbar {
+    padding: 0;
+}
+
+.logo-dashboard {
+    margin-left: 20px;
+    border-radius: 25px;
+}
+
+.icone-profil {
+    font-size: 2rem;
+}
+
+.icone-power {
+    font-size: 2rem;
+    margin-right: 20px;
+}
+
+.titre-dashboard {
+    text-align: center;
+    color: white;
+    margin-top: 25px;
+}
+
+.formulaire {
+    background-color: rgb(152, 151, 147);
+    width: 700px;
+    padding: 15px;
+}
+
+.marge-colonne {
+    margin: 5px;
+}
+
+.colonne input {
+    border-radius: 9px;
+}

@@ -5,46 +5,47 @@
     <meta charset="UTF-8">
     <!-- Lien vers le CSS de Bootstrap pour les styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="/assets/CSS/dashboard.css">
     <!-- script de Bootstrap pour les fonctionnalités JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <!-- Lien pour les icônes Bootstrap -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 </head>
 
-<body style="background-color: rgb(117, 245, 245);"> 
+<body> 
 
-    <nav class="navbar navbar-light bg-white" style="padding: 0%;" >
+    <nav class="navbar navbar-light bg-white" >
         <a class="navbar-brand" href="#">
             
-            <img src="/images/logo.jpg" alt="Logo" width="75" height="75" class="d-inline-block align-top" style="margin-left: 20px; border-radius: 25px 25px 25px 25px;">
+            <img src="/images/logo.jpg" alt="Logo" width="75" height="75" class="d-inline-block align-top logo-dashboard">
         </a>
         <a href="#">Accueil</a>
         <a href="#">Calcul Clé NIR</a>
-        <a href="#" ><i class="bi bi-person-fill" style="font-size: 2rem;"></i></a>
-        <i class="bi bi-power text-dark " style="font-size: 2rem; margin-right: 20px;"></i>
+        <a href="#" ><i class="bi bi-person-fill icone-profil"></i></a>
+        <i class="bi bi-power text-dark icone-power"></i>
     </nav>
 
     <!--Titre de la page-->
-        <h1 style="text-align: center; color: white; margin-top: 25px;">FICHIER DES ASSURES</h1>
+        <h1 class="titre-dashboard">FICHIER DES ASSURES</h1>
         
     <!--Formulaire-->
 
-    <form class="formulaire" style="background-color: rgb(152, 151, 147); width: 700px; padding: 15px;" >
+    <form class="formulaire" >
 
-    <div class="colonne" style=" margin: 5px;">
-        <input type="text" placeholder="NIR :" style="border-radius: 9px;">
-        <input type="text" placeholder="NUM COMPOSTAGE :" style="border-radius: 9px;">
-        <input type="text" placeholder="DATE DE TRAITEMENT:" style="border-radius: 9px;">
+    <div class="colonne marge-colonne">
+        <input type="text" placeholder="NIR :">
+        <input type="text" placeholder="NUM COMPOSTAGE :">
+        <input type="text" placeholder="DATE DE TRAITEMENT:">
     </div>
 
     <div class="colonne">
-        <input type="text" placeholder="PRÉNOM :" style="border-radius: 9px;">
-        <input type="text" placeholder="NOM :" style="border-radius: 9px;">
+        <input type="text" placeholder="PRÉNOM :">
+        <input type="text" placeholder="NOM :">
     </div>
 
-    <div class="colonne" style="margin: 5px;">
-        <input type="number" placeholder="DATE DE NAISSANCE :" style="border-radius: 9px;">
-        <input type="text" placeholder="NIR (BNF):" style="border-radius: 9px;">
+    <div class="colonne marge-colonne">
+        <input type="texte" placeholder="DATE DE NAISSANCE :">
+        <input type="text" placeholder="NIR (BNF):">
     </div>
 
     
@@ -60,9 +61,11 @@
         <thead>
             <tr>
                 <th>NIR</th>
-                <th>Prénom</th>
-                <th>Nom</th>
+                <th>Num COMPOSTAGE</th>
+                <th>Nom, Prénom</th>
+                <th>Date de traitement</th>
                 <th>Date naissance</th>
+                <th>NIR (BNF)</th>
             </tr>
         </thead>
 
