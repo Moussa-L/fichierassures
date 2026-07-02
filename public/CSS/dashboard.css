@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(117, 245, 245);
+    background-color: rgb(63, 186, 186);
 }
 
 .navbar {
@@ -39,3 +39,15 @@ body {
 .colonne input {
     border-radius: 9px;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+th{
+    border: 1px solid black;
+    padding: 8px;
+
+}
+
+
