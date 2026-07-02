@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Entity\Users;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Attribute\Route;
@@ -10,33 +10,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class AssuresController extends AbstractController
 {
-    
-     // Route pour la page de login
     #[Route('/login', name: 'app_assures_login')]
-    public function index(Request $request): Response      
-    {
-        
-    //ici je vais recupere les $users et renvoyer a la view.
+    public function index(): Response
+{
+    $users1 = new Users("J00567", "HedjaZaharir", "12345");
+    $users2 = new Users("J00987", "SouffouDine", "09864");
+    $users3 = new Users("J00453", "MohamedaAhmed", "56478");
+    $users4 = new Users("J00637", "SouffouEchat", "25806");
 
-    
+    $LesUsers = [$users1, $users2, $users3, $users4];
 
-
-
-        /* Récupération des paramètres GET nom et prenom avec des valeurs par défaut
-        $nom = "moussa";
-        $prenom = "ali";
-        $role = "admin";
-       */
-
-        //Retourne une réponse 
-         /*return $this->render('premier_symfony/index.html.twig', [
-             'nom' => $nom,
-             'prenom' => $prenom,                                                                                                                             
-             'role' => $role
-         ]); */
-
-         return new Response();
-    }
+    return $this->render('premier_symfony/index.html.twig', [
+        'LesUsers' => $LesUsers,
+    ]);
+}
 
     // Route pour la page du tableau de bord
     #[Route('/dashboard', name: 'dashBoard')]

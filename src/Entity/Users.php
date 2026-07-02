@@ -45,7 +45,9 @@ class Users
         return $this;
     }
 
-    public
+    public function listingUsers(){
+        return $this->listingUsers;
+    }
 
 
 }
