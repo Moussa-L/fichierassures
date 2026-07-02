@@ -20,7 +20,7 @@ final class AssuresController extends AbstractController
 
     $LesUsers = [$users1, $users2, $users3, $users4];
 
-    return $this->render('premier_symfony/index.html.twig', [
+    return $this->render('premier_symfony/login.html.twig', [
         'LesUsers' => $LesUsers,
     ]);
 }
