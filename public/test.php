@@ -1,5 +1,6 @@
 <?php
-
+//DB : assures
+//port: 1433
 $serverName = "55.38.4.121";
 
 $connectionOptions = [
