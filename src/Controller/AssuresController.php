@@ -25,6 +25,10 @@ final class AssuresController extends AbstractController
     #[Route('/dashboard', name: 'dashBoard')]
     public function dashBord(): Response
     {
-        return $this->render('premier_symfony/dashboard.html.twig');
+        $assures = Assures::getTestData();
+
+        return $this->render('premier_symfony/dashboard.html.twig', [
+            'Assures' => $assures,
+        ]);
     }
 }

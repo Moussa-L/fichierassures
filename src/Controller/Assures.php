@@ -1,7 +1,19 @@
 <?php
-// je vais créer les Assures dans un tableau pour les tester
 
-$assures1 = new Coordonnee("2901199397081", "1250497612003", "MADI", "IRCHAM MOURSAL", "14/04/2025", "(vide)", "24/02/2027", "BDO", "", "");
-		
+namespace App\Controller;
 
-?>
+final class Assures
+{
+    public static function getTestData(): array
+    {
+        return [[
+            'nir' => '2901199397081',
+            'numCompostage' => '1250497612003',
+            'nom' => 'MADI',
+            'prenom' => 'IRCHAM MOURSAL',
+            'dateTraitement' => new \DateTime('2025-04-14'),
+            'dateNaissance' => new \DateTime('1993-01-29'),
+            'nirBnf' => '1250497612003',
+        ]];
+    }
+}
