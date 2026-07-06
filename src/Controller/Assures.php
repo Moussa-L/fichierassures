@@ -12,6 +12,7 @@ final class Assures
             'nom' => 'MADI',
             'prenom' => 'IRCHAM MOURSAL',
             'dateTraitement' => new \DateTime('2025-04-14'),
+            'lieuNaissance' => 'MARRAKECH',
             'dateNaissance' => new \DateTime('1993-01-29'),
             'nirBnf' => '1250497612003',
         ]];
