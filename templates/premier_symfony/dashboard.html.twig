@@ -61,11 +61,12 @@
         <thead>
             <tr>
                 <th>NIR</th>
-                <th>Num COMPOSTAGE</th>
-                <th>Nom, Prénom</th>
-                <th>Date de traitement</th>
-                <th>Date naissance</th>
                 <th>NIR (BNF)</th>
+                <th>Nom, Prénom</th>
+                <th>Date naissance</th>
+                <th>Lieu de naissance</th>
+                <th>addresse Complete</th>
+                <th>Date de traitement</th>
             </tr>
         </thead>
 
@@ -73,12 +74,13 @@
         <tbody id="corpsTableau">
         <tr>
         {% for a in Assures %}
-        <td>{{ a.nir }}</td>
-            <td>{{ a.numCompostage }}</td>
-            <td>{{ a.nom ~ ' ' ~ a.prenom }}</td>
-            <td>{{ a.dateTraitement ? a.dateTraitement|date('d/m/Y') : '' }}</td>
-            <td>{{ a.dateNaissance ? a.dateNaissance|date('d/m/Y') : '' }}</td>
+            <td>{{ a.nir }}</td>
             <td>{{ a.nirBnf }}</td>
+            <td>{{ a.nom ~ ' ' ~ a.prenom }}</td>
+            <td>{{ a.dateNaissance ? a.dateNaissance|date('d/m/Y') : '' }}</td>
+            <td>{{ a.lieuNaissance }}</td>
+            <td>{{ a.addresseComplete}}
+            <td>{{ a.dateTraitement ? a.dateTraitement|date('d/m/Y') : '' }}</td>
         </tr>
         {% else %}
         <tr><td colspan="6">Aucun résultat</td></tr>
