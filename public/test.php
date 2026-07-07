@@ -21,7 +21,7 @@ if ($conn) {
 $conenectionOptions = [
     "Database" => "assures",
     "Uid" => "bounou",
-    "PWD" => "MotDePasseFort123!"
+    "PWD" => "marouvatou27BNR!"
 ];
 
 $conn = sqlsrv_connect($serverName, $conenectionOptions);
