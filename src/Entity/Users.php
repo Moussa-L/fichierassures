@@ -3,11 +3,24 @@
 namespace App\Entity;
 
 use App\Repository\UsersRepository;
+use Doctrine\ORM\Mapping as ORM;
 
+#[ORM\Entity(repositoryClass: UsersRepository::class)]
+#[ORM\Table(name: 'users')]
 class Users
 {
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private ?int $id = null;
+
+    #[ORM\Column(type: 'string', length: 50)]
     private ?string $numAgent = null;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $nomPrenom = null;
+
+    #[ORM\Column(type: 'string', length: 255)]
     private ?string $password = null;
 
     public function __construct (string $numAgent, string $nomPrenom, string $password)

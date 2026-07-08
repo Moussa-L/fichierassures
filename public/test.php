@@ -18,17 +18,3 @@ if ($conn) {
     print_r(sqlsrv_errors());
 }
 
-$conenectionOptions = [
-    "Database" => "assures",
-    "Uid" => "bounou",
-    "PWD" => "marouvatou27BNR!"
-];
-
-$conn = sqlsrv_connect($serverName, $conenectionOptions);
-
-if ($conn) {
-    echo "Connexion SQL Server OK !";
-} else {
-    echo "Erreur de connexion : \n";
-    print_r(sqlsrv_errors());
-}

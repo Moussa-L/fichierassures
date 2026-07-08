@@ -1,0 +1,7 @@
+users:
+    resource: ../../src/Controller/AssuresController.php
+    type: attribute
+
+api:
+    resource: ../../src/Controller/
+    type: attribute
