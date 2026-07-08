@@ -26,9 +26,11 @@ final class AssuresController extends AbstractController
     public function dashBord(): Response
     {
         $assures = Assures::getTestData();
+        require __DIR__ . '/UsersAssures.php';
 
         return $this->render('premier_symfony/dashboard.html.twig', [
             'Assures' => $assures,
+            'user' => $users1,
         ]);
     }
 }

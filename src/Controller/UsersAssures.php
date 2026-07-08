@@ -1,5 +1,7 @@
 <?php
 
+use App\Entity\Users;
+
 $users1 = new Users("J00567", "HedjaZaharir", "12345");
 /*$users2 = new Users("J00987", "SouffouDine", "09864");
 $users3 = new Users("J00453", "MohamedaAhmed", "56478");
