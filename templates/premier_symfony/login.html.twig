@@ -5,23 +5,24 @@
     <meta charset="UTF-8">
     <title>Connexion</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <link rel="stylesheet" href="/CSS/login.css">
+    <link rel="stylesheet" href="{{ asset('CSS/login.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-    <img src="{{ asset('images/cssm.jpg') }}" alt="Logo">
 </head>
 
-    <body class="login-body">
-        
-        <h1 class="text-center mt-5">Bienvenue</h1>
-        <h3 class="text-center mb-5">dans l'application web Fichier des Assurés</h3>
+    <body class="login-body" style="background-image: url('{{ asset('images/cssm.jpg') }}'); background-size: cover; background-position: center; background-repeat: no-repeat; min-height: 100vh;">
+        <div class="login-page">
+            <div class="text-center mt-5">
+                <h1 class="mb-2">Bienvenue</h1>
+                <h3>dans l'application web Fichier des Assurés</h3>
+            </div>
 
-    <main class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-5">
+            <main class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-5">
 
-                <h1 class="text-center mb-4">Connexion</h1>
+                        <h1 class="text-center mb-4">Connexion</h1>
 
-                <form class="card p-4 shadow-sm">
+                        <form class="card p-4 shadow-sm">
                     <div class="mb-3">
                         <label for="numberGRF" class="form-label">Numéro GRH</label>
                         <!--inputmode, c'est pour les claviers numériques sur les téléphones. Et pattern, c'est pour le nombre de saisie-->
@@ -38,9 +39,10 @@
                     </button>
                 </form>
 
-            </div>
+                    </div>
+                </div>
+            </main>
         </div>
-    </main>
 
 </body>
 </html>
