@@ -17,7 +17,8 @@ final class AssuresController extends AbstractController
         
 
         return $this->render('premier_symfony/login.html.twig', [
-            'LesUsers' => $LesUsers,
+            
+            //'LesUsers' => $LesUsers,
         ]);
     }
 
