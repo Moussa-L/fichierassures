@@ -6,7 +6,7 @@ $serverName = "55.38.4.121";
 $connectionOptions = [
     "Database" => "assures",
     "Uid" => "lidya",
-    "PWD" => "MotDepasseFort123!" 
+    "PWD" => "Lidyamoussa2907!" 
 ];
 
 $conn = sqlsrv_connect($serverName, $connectionOptions);
