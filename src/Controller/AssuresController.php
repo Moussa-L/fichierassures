@@ -2,9 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\ChmDrg;
 use App\Entity\Users;
-use App\Repository\ChmDrgRepository;
 use App\Repository\ChmListeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,22 +25,14 @@ final class AssuresController extends AbstractController
 
     // Route pour la page du tableau de bord
     #[Route('/dashboard', name: 'dashBoard')]
-    public function dashBord(ChmListeRepository $chmListeRepository, ChmDrgRepository $chmDrgRepository): Response
+    public function dashBord(ChmListeRepository $chmListeRepository): Response
     {
-        $assures = array_map(function ($assure) use ($chmDrgRepository): array {
-            $adresse = $chmDrgRepository->findByAssac($assure->getAssmacBen());
+        $assures = array_map(function (array $assure): array {
+            $assure['lieuNaissance'] = '';
+            $assure['adresseComplete'] = $this->formatAdresseComplete($assure);
 
-            return [
-                'nir' => $assure->getAssmacBen(),
-                'nirBnf' => $assure->getMacbenBen(),
-                'nom' => $assure->getNomstdBen(),
-                'prenom' => $assure->getNomprmBen(),
-                'dateNaissance' => $assure->getNaidatB(),
-                'lieuNaissance' => '',
-                'adresseComplete' => $this->formatAdresseComplete($adresse),
-                'dateTraitement' => $assure->getJoddsdJ(),
-            ];
-        }, $chmListeRepository->findAll());
+            return $assure;
+        }, $chmListeRepository->findAllForDashboard());
 
         require __DIR__ . '/UsersAssures.php';
 
@@ -52,25 +42,21 @@ final class AssuresController extends AbstractController
         ]);
     }
 
-    private function formatAdresseComplete(?ChmDrg $adresse): string
+    private function formatAdresseComplete(array $assure): string
     {
-        if (!$adresse) {
-            return '';
-        }
-
         $voie = trim(implode(' ', array_filter([
-            $adresse->getVoitypDrg(),
-            $adresse->getVoilibDrg(),
+            $assure['adresseType'] ?? null,
+            $assure['adresseLibelle'] ?? null,
         ])));
 
         $ville = trim(implode(' ', array_filter([
-            $adresse->getCdptDrg(),
-            $adresse->getCmmuneDrg(),
+            $assure['adresseCodePostal'] ?? null,
+            $assure['adresseCommune'] ?? null,
         ])));
 
         return implode(', ', array_filter([
             $voie,
-            $adresse->getCplDrg(),
+            $assure['adresseComplement'] ?? null,
             $ville,
         ]));
     }
