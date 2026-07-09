@@ -6,7 +6,7 @@ use App\Repository\ChmListeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ChmListeRepository::class)]
-#[ORM\Table(name: 'chm_list', schema: 'dbo')]
+#[ORM\Table(name: 'chm_liste', schema: 'dbo')]
 class ChmListe
 {
     #[ORM\Id]
