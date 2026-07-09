@@ -23,10 +23,11 @@ class ChmListeRepository extends ServiceEntityRepository
         return parent::findAll();
     }
 
-    public function findAllForDashboard(): array
+    public function findAllForDashboard(int $limit = 1000): array
     {
-        $sql = <<<'SQL'
-            SELECT
+        $safeLimit = max(1, min(5000, $limit));
+        $sql = <<<SQL
+            SELECT TOP {$safeLimit}
                 l.[ASSMAC_BEN] AS nir,
                 l.[MACBEN_BEN] AS nirBnf,
                 l.[NOMSTD_BEN] AS nom,
