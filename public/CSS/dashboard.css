@@ -5,25 +5,26 @@ body {
 
 .navbar {
     padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
 }
 
 .navbar a {
-    color: rgb(1, 7, 132);
+    color: #1f2937;
     text-decoration: none;
 }
 
 .logo-dashboard {
     margin-left: 20px;
     border-radius: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
 
 .icone-profil {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
 }
 
 .icone-power {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     margin-right: 20px;
     cursor: pointer;
 }
@@ -35,6 +36,18 @@ body {
 
 .card {
     border-radius: 1rem;
+}
+
+main.container-fluid {
+    max-width: 100%;
+}
+
+.table-responsive {
+    width: 100%;
+}
+
+.table {
+    min-width: 100%;
 }
 
 .table thead th {

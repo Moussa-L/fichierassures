@@ -13,21 +13,21 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <nav class="navbar navbar-light bg-white shadow-sm">
         <div class="container-fluid px-4">
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="/images/logo.jpg" alt="Logo" width="75" height="75" class="d-inline-block align-top logo-dashboard">
             </a>
-            <div class="ms-auto d-flex align-items-center gap-3">
-                <a class="nav-link text-primary fw-semibold" href="#">Accueil</a>
-                <a class="nav-link text-primary fw-semibold" href="#">Calcul Clé NIR</a>
-                <a class="nav-link text-primary fw-semibold" href="#"><i class="bi bi-person-fill icone-profil"></i> {{ user.nomPrenom }}</a>
+            <div class="d-flex align-items-center gap-3">
+                <a class="nav-link text-dark fw-semibold" href="#">Accueil</a>
+                <a class="nav-link text-dark fw-semibold" href="#">Calcul Clé NIR</a>
+                <a class="nav-link text-dark fw-semibold" href="#"><i class="bi bi-person-fill icone-profil"></i> {{ user.nomPrenom }}</a>
                 <i class="bi bi-power text-dark icone-power" id="bouttonDeco"></i>
             </div>
         </div>
     </nav>
 
-    <main class="container py-4">
+    <main class="container-fluid px-4 py-4">
         <div class="text-center mb-4">
             <h1 class="titre-dashboard display-6 fw-bold">FICHIER DES ASSURÉS</h1>
             <p class="text-white-50">Recherche et consultation rapide des assurés</p>
