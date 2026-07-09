@@ -38,7 +38,7 @@ class ChmListeRepository extends ServiceEntityRepository
                 d.[VOILIB_DRG] AS adresseLibelle,
                 d.[CPL_DRG] AS adresseComplement,
                 d.[CDPT_DRG] AS adresseCodePostal,
-                d.[CMMUNE_DRG] AS adresseCommune
+                d.[Cmmune_drg] AS adresseCommune
             FROM [dbo].[chm_liste] l
             LEFT JOIN [dbo].[chm_drg] d ON d.[ASSAC_DRG] = l.[ASSMAC_BEN]
             ORDER BY l.[JODDSD_J] DESC
