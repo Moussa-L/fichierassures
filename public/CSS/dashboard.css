@@ -1,9 +1,10 @@
 body {
-    background-color: rgb(63, 186, 186);
+    background: linear-gradient(135deg, #0d6efd 0%, #20c997 100%);
+    min-height: 100vh;
 }
 
 .navbar {
-    padding: 0;
+    padding: 0.5rem 0;
 }
 
 .navbar a {
@@ -14,49 +15,33 @@ body {
 .logo-dashboard {
     margin-left: 20px;
     border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .icone-profil {
-    font-size: 2rem;
+    font-size: 1.2rem;
 }
 
 .icone-power {
-    font-size: 2rem;
+    font-size: 1.2rem;
     margin-right: 20px;
+    cursor: pointer;
 }
 
 .titre-dashboard {
-    text-align: center;
     color: white;
-    margin-top: 25px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.formulaire {
-    background-color: rgb(235, 214, 129);
-    width: 700px;
-    padding: 15px;
+.card {
+    border-radius: 1rem;
 }
 
-.marge-colonne {
-    margin: 5px;
+.table thead th {
+    font-weight: 600;
 }
 
-.colonne input {
-    border-radius: 9px;
-}
-
-table {
-    border-collapse: collapse;
-}
-
-th {
-    border: 1px solid black;
-    padding: 8px;
-    background: burlywood;
-}
-
-td{
-    border: 1px solid black;
-    padding: 8px;
+.table-hover tbody tr:hover {
+    background-color: #f5f9ff;
 }
 
