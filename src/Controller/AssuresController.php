@@ -7,6 +7,7 @@ use App\Repository\ChmListeRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 
 final class AssuresController extends AbstractController
 {
@@ -25,14 +26,29 @@ final class AssuresController extends AbstractController
 
     // Route pour la page du tableau de bord
     #[Route('/dashboard', name: 'dashBoard')]
-    public function dashBord(ChmListeRepository $chmListeRepository): Response
+    public function dashBord(Request $request, ChmListeRepository $chmListeRepository): Response
     {
+        $filters = [
+            'nir' => $request->query->get('nir', ''),
+            'macben' => $request->query->get('macben', ''),
+            'nom' => $request->query->get('nom', ''),
+            'prenom' => $request->query->get('prenom', ''),
+            'dateNaissance' => $request->query->get('dateNaissance', ''),
+            'dateTraitement' => $request->query->get('dateTraitement', ''),
+            'nirBnf' => $request->query->get('nirBnf', ''),
+        ];
+
+        $hasFilters = array_filter($filters);
+        $results = $hasFilters 
+            ? $chmListeRepository->searchAssures($filters)
+            : $chmListeRepository->findAllForDashboard();
+
         $assures = array_map(function (array $assure): array {
             $assure['lieuNaissance'] = '';
             $assure['adresseComplete'] = $this->formatAdresseComplete($assure);
 
             return $assure;
-        }, $chmListeRepository->findAllForDashboard());
+        }, $results);
 
         require __DIR__ . '/UsersAssures.php';
 

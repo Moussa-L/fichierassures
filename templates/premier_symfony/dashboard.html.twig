@@ -30,23 +30,26 @@
         
     <!--Formulaire-->
 
-    <form class="formulaire" >
+    <form class="formulaire" method="GET" action="{{ path('dashBoard') }}">
 
     <div class="colonne marge-colonne">
-        <input type="text" placeholder="NIR :">
-        <input type="text" placeholder="NUM COMPOSTAGE :">
-        <input type="text" placeholder="DATE DE TRAITEMENT:">
+        <input type="text" name="nir" placeholder="NIR :" value="{{ app.request.query.get('nir', '') }}">
+        <input type="text" name="macben" placeholder="NUM COMPOSTAGE :" value="{{ app.request.query.get('macben', '') }}">
+        <input type="text" name="dateTraitement" placeholder="DATE DE TRAITEMENT:" value="{{ app.request.query.get('dateTraitement', '') }}">
     </div>
 
     <div class="colonne">
-        <input type="text" placeholder="PRÉNOM :">
-        <input type="text" placeholder="NOM :">
+        <input type="text" name="prenom" placeholder="PRÉNOM :" value="{{ app.request.query.get('prenom', '') }}">
+        <input type="text" name="nom" placeholder="NOM :" value="{{ app.request.query.get('nom', '') }}">
     </div>
 
     <div class="colonne marge-colonne">
-        <input type="texte" placeholder="DATE DE NAISSANCE :">
-        <input type="text" placeholder="NIR (BNF):">
+        <input type="text" name="dateNaissance" placeholder="DATE DE NAISSANCE :" value="{{ app.request.query.get('dateNaissance', '') }}">
+        <input type="text" name="nirBnf" placeholder="NIR (BNF):" value="{{ app.request.query.get('nirBnf', '') }}">
     </div>
+    
+    <button type="submit" class="btn btn-primary">Rechercher</button>
+    <a href="{{ path('dashBoard') }}" class="btn btn-secondary">Réinitialiser</a>
 
     
 
