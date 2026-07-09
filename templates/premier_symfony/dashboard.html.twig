@@ -77,10 +77,10 @@
             <td>{{ a.nir }}</td>
             <td>{{ a.nirBnf }}</td>
             <td>{{ a.nom ~ ' ' ~ a.prenom }}</td>
-            <td>{{ a.dateNaissance ? a.dateNaissance|date('d/m/Y') : '' }}</td>
+            <td>{{ a.dateNaissance ?: '' }}</td>
             <td>{{ a.lieuNaissance }}</td>
             <td>{{ a.adresseComplete }}</td>
-            <td>{{ a.dateTraitement ? a.dateTraitement|date('d/m/Y') : '' }}</td>
+            <td>{{ a.dateTraitement ?: '' }}</td>
         </tr>
         {% else %}
         <tr><td colspan="7">Aucun résultat</td></tr>
