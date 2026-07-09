@@ -18,11 +18,19 @@
             <a class="navbar-brand d-flex align-items-center" href="#">
                 <img src="/images/logo.jpg" alt="Logo" width="75" height="75" class="d-inline-block align-top logo-dashboard">
             </a>
-            <div class="d-flex align-items-center gap-3">
-                <a class="nav-link text-dark fw-semibold" href="#">Accueil</a>
-                <a class="nav-link text-dark fw-semibold" href="#">Calcul Clé NIR</a>
-                <a class="nav-link text-dark fw-semibold" href="#"><i class="bi bi-person-fill icone-profil"></i> {{ user.nomPrenom }}</a>
-                <i class="bi bi-power text-dark icone-power" id="bouttonDeco"></i>
+            <div class="d-flex align-items-center gap-4">
+                <div class="nav-item">
+                    <a class="nav-link text-dark fw-semibold" href="#">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a class="nav-link text-dark fw-semibold" href="#">Calcul Clé NIR</a>
+                </div>
+                <div class="nav-item d-flex align-items-center gap-2">
+                    <a class="nav-link text-dark fw-semibold" href="#"><i class="bi bi-person-fill icone-profil"></i> {{ user.nomPrenom }}</a>
+                </div>
+                <div class="nav-item">
+                    <i class="bi bi-power text-dark icone-power" id="bouttonDeco"></i>
+                </div>
             </div>
         </div>
     </nav>
