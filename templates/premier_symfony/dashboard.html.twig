@@ -67,7 +67,6 @@
                 <th>NIR (BNF)</th>
                 <th>Nom, Prénom</th>
                 <th>Date naissance</th>
-                <th>Lieu de naissance</th>
                 <th>addresse Complete</th>
                 <th>Date de traitement</th>
             </tr>
@@ -81,12 +80,11 @@
             <td>{{ a.nirBnf }}</td>
             <td>{{ a.nom ~ ' ' ~ a.prenom }}</td>
             <td>{{ a.dateNaissance ?: '' }}</td>
-            <td>{{ a.lieuNaissance }}</td>
             <td>{{ a.adresseComplete }}</td>
             <td>{{ a.dateTraitement ?: '' }}</td>
         </tr>
         {% else %}
-        <tr><td colspan="7">Aucun résultat</td></tr>
+        <tr><td colspan="6">Aucun résultat</td></tr>
         {% endfor %}
         </tbody>
 
