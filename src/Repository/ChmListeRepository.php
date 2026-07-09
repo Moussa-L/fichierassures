@@ -2,7 +2,6 @@
 
 namespace App\Repository;
 
-use App\Entity\ChmDrg;
 use App\Entity\ChmListe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -26,23 +25,27 @@ class ChmListeRepository extends ServiceEntityRepository
 
     public function findAllForDashboard(): array
     {
-        return $this->createQueryBuilder('l')
-            ->select([
-                'l.assmacBen AS nir',
-                'l.macbenBen AS nirBnf',
-                'l.nomstdBen AS nom',
-                'l.nomprmBen AS prenom',
-                'l.naidatB AS dateNaissance',
-                'l.joddsdJ AS dateTraitement',
-                'd.voitypDrg AS adresseType',
-                'd.voilibDrg AS adresseLibelle',
-                'd.cplDrg AS adresseComplement',
-                'd.cdptDrg AS adresseCodePostal',
-                'd.cmmuneDrg AS adresseCommune',
-            ])
-            ->leftJoin(ChmDrg::class, 'd', 'WITH', 'd.assacDrg = l.assmacBen')
-            ->orderBy('l.joddsdJ', 'DESC')
-            ->getQuery()
-            ->getArrayResult();
+        $sql = <<<'SQL'
+            SELECT
+                l.[ASSMAC_BEN] AS nir,
+                l.[MACBEN_BEN] AS nirBnf,
+                l.[NOMSTD_BEN] AS nom,
+                l.[NOMPRM_BEN] AS prenom,
+                l.[NAIDAT_B] AS dateNaissance,
+                l.[JODDSD_J] AS dateTraitement,
+                d.[VOITYP_DRG] AS adresseType,
+                d.[VOILIB_DRG] AS adresseLibelle,
+                d.[CPL_DRG] AS adresseComplement,
+                d.[CDPT_DRG] AS adresseCodePostal,
+                d.[CMMUNE_DRG] AS adresseCommune
+            FROM [dbo].[chm_list] l
+            LEFT JOIN [dbo].[chm_drg] d ON d.[ASSAC_DRG] = l.[ASSMAC_BEN]
+            ORDER BY l.[JODDSD_J] DESC
+        SQL;
+
+        return $this->getEntityManager()
+            ->getConnection()
+            ->executeQuery($sql)
+            ->fetchAllAssociative();
     }
 }
