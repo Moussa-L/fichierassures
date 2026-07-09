@@ -6,26 +6,26 @@ use App\Repository\ChmListeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ChmListeRepository::class)]
-#[ORM\Table(name: 'chm_list')]
+#[ORM\Table(name: 'chm_list', schema: 'dbo')]
 class ChmListe
 {
     #[ORM\Id]
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(name: 'ASSMAC_BEN', type: 'string', length: 50)]
     private ?string $assmacBen = null;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[ORM\Column(name: 'MACBEN_BEN', type: 'string', length: 50, nullable: true)]
     private ?string $macbenBen = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(name: 'NOMSTD_BEN', type: 'string', length: 255, nullable: true)]
     private ?string $nomstdBen = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(name: 'NOMPRM_BEN', type: 'string', length: 255, nullable: true)]
     private ?string $nomprmBen = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(name: 'NAIDAT_B', type: 'datetime', nullable: true)]
     private ?\DateTime $naidatB = null;
 
-    #[ORM\Column(type: 'datetime', nullable: true)]
+    #[ORM\Column(name: 'JODDSD_J', type: 'datetime', nullable: true)]
     private ?\DateTime $joddsdJ = null;
 
     public function getAssmacBen(): ?string

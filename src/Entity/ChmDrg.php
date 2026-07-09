@@ -6,30 +6,30 @@ use App\Repository\ChmDrgRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ChmDrgRepository::class)]
-#[ORM\Table(name: 'chm_drg')]
+#[ORM\Table(name: 'chm_drg', schema: 'dbo')]
 class ChmDrg
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(name: 'id', type: 'integer')]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 50)]
+    #[ORM\Column(name: 'ASSAC_DRG', type: 'string', length: 50)]
     private ?string $assacDrg = null;
 
-    #[ORM\Column(type: 'string', length: 50, nullable: true)]
+    #[ORM\Column(name: 'VOITYP_DRG', type: 'string', length: 50, nullable: true)]
     private ?string $voitypDrg = null;
 
-    #[ORM\Column(type: 'string', length: 500, nullable: true)]
+    #[ORM\Column(name: 'VOILIB_DRG', type: 'string', length: 500, nullable: true)]
     private ?string $voilibDrg = null;
 
-    #[ORM\Column(type: 'string', length: 500, nullable: true)]
+    #[ORM\Column(name: 'CPL_DRG', type: 'string', length: 500, nullable: true)]
     private ?string $cplDrg = null;
 
-    #[ORM\Column(type: 'string', length: 10, nullable: true)]
+    #[ORM\Column(name: 'CDPT_DRG', type: 'string', length: 10, nullable: true)]
     private ?string $cdptDrg = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(name: 'CMMUNE_DRG', type: 'string', length: 255, nullable: true)]
     private ?string $cmmuneDrg = null;
 
     public function getId(): ?int
