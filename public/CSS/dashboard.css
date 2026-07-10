@@ -1,3 +1,45 @@
+ :root {
+     --logo-1: #FFB199; /* pastel coral */
+     --logo-2: #FFD59A; /* pastel peach */
+     --logo-3: #C8F0A6; /* pastel mint */
+     --logo-4: #E6C7E8; /* pastel lavender */
+     --logo-5: #BEE7FF; /* pastel sky blue */
+     --logo-6: #6E5A9A; /* pastel indigo (hand) */
+ }
+
+ body {
+     min-height: 100vh;
+ }
+
+ .logo-dashboard {
+     margin-left: 0;
+     border-radius: 25px;
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+ }
+
+ .palette {
+     display: inline-flex;
+     gap: 6px;
+     align-items: center;
+ }
+
+ .palette-dot {
+     width: 14px;
+     height: 14px;
+     border-radius: 50%;
+     box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+ }
+ .palette-dot:nth-child(1){ background: var(--logo-1); }
+ .palette-dot:nth-child(2){ background: var(--logo-2); }
+ .palette-dot:nth-child(3){ background: var(--logo-3); }
+ .palette-dot:nth-child(4){ background: var(--logo-4); }
+ .palette-dot:nth-child(5){ background: var(--logo-5); }
+ .palette-dot:nth-child(6){ background: var(--logo-6); }
+
+ .titre-dashboard {
+     color: var(--logo-6);
+     text-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+ }
 body {
     min-height: 100vh;
 }
