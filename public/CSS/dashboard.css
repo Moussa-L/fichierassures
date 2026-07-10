@@ -1,45 +1,9 @@
 body {
-    background: linear-gradient(135deg, #0d6efd 0%, #20c997 100%);
     min-height: 100vh;
-}
-
-.navbar {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.navbar a {
-    color: #2100f8;
-    text-decoration: none;
-}
-
-.logo-dashboard {
-    margin-left: 20px;
-    border-radius: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-}
-
-.icone-profil {
-    font-size: 1.1rem;
-}
-
-.icone-power {
-    font-size: 1.1rem;
-    margin-right: 20px;
-    cursor: pointer;
-}
-
-.titre-dashboard {
-    color: white;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
 .card {
     border-radius: 1rem;
-}
-
-main.container-fluid {
-    max-width: 100%;
 }
 
 .table-responsive {
