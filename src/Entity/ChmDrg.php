@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ChmDrgRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+// Entité représentant l'adresse d'un assuré dans la table chm_drg.
 #[ORM\Entity(repositoryClass: ChmDrgRepository::class)]
 #[ORM\Table(name: 'chm_drg', schema: 'dbo')]
 class ChmDrg

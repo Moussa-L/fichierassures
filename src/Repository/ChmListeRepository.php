@@ -6,6 +6,8 @@ use App\Entity\ChmListe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+// Repository pour l'entité ChmListe.
+// Contient des requêtes personnalisées pour le tableau de bord et la recherche.
 class ChmListeRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -13,16 +15,19 @@ class ChmListeRepository extends ServiceEntityRepository
         parent::__construct($registry, ChmListe::class);
     }
 
+    // Recherche un assuré par son NIR.
     public function findByNir(string $nir): ?ChmListe
     {
         return $this->findOneBy(['assmacBen' => $nir]);
     }
 
+    // Récupère tous les enregistrements de la table chm_liste.
     public function findAll(): array
     {
         return parent::findAll();
     }
 
+    // Récupère les données nécessaires pour le tableau de bord.
     public function findAllForDashboard(int $limit = 1000): array
     {
         $safeLimit = max(1, min(5000, $limit));
@@ -50,6 +55,7 @@ class ChmListeRepository extends ServiceEntityRepository
             ->fetchAllAssociative();
     }
 
+    // Recherche d'assurés avec filtres dynamiques pour le tableau de bord.
     public function searchAssures(array $filters, int $limit = 1000): array
     {
         $safeLimit = max(1, min(5000, $limit));

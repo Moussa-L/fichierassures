@@ -1,11 +1,10 @@
 <?php
 
-
 namespace App\Entity;
 
 use App\Repository\CoordonneeRepository;
 
-
+// Entité pour représenter les coordonnées détaillées d'un assuré.
 class Coordonnee
 {
     private ?string $nirAss = null;
@@ -19,9 +18,7 @@ class Coordonnee
     private ?string $dateFinJOD = null;
     private ?string $source;
 
-
     public function __construct(){
-
     }
 
     public function getNir(){
@@ -94,7 +91,4 @@ class Coordonnee
         $this->source = $source;
         return $this;
     }
-
 }
-
-?> 

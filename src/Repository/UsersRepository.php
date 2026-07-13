@@ -6,6 +6,8 @@ use App\Entity\Users;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+// Repository pour l'entité Users.
+// Fournit des méthodes dédiées pour récupérer les utilisateurs.
 class UsersRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
@@ -13,13 +15,15 @@ class UsersRepository extends ServiceEntityRepository
         parent::__construct($registry, Users::class);
     }
 
+    // Recherche un utilisateur par son numéro d'agent.
     public function findByNumAgent(string $numAgent): ?Users
     {
         return $this->findOneBy(['numAgent' => $numAgent]);
     }
 
+    // Récupère tous les utilisateurs.
     public function findAll(): array
     {
-        return $this->findAll();
+        return parent::findAll();
     }
 }

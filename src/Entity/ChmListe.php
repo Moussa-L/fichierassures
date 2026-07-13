@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ChmListeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+// Entité représentant un assuré dans la table chm_liste.
 #[ORM\Entity(repositoryClass: ChmListeRepository::class)]
 #[ORM\Table(name: 'chm_liste', schema: 'dbo')]
 class ChmListe

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+// Classe utilitaire pour fournir des données de test d'un assuré.
 final class Assures
 {
     public static function getTestData(): array
@@ -18,7 +19,6 @@ final class Assures
             'addresseComplete' => '123 Rue de la Liberté, Marrakech',
             'dateFinJOD' => new \DateTime('2025-04-14'),
             'source' => 'Source A',
-            
         ]];
     }
 }
