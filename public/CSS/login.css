@@ -1,24 +1,2 @@
-/* Réinitialise la page pour éviter les barres de défilement inattendues */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: hidden; /* supprime la barre de défilement de la page */
-}
-
-/* Image de fond couvre tout l'écran sans répétition */
-.login-body {
-    min-height: 100vh;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
-
-/* Ne pas écraser les utilitaires Bootstrap comme .mb-2 */
-.welcome-title {
-    margin: 0 0 .5rem 0;
-}
 
 
