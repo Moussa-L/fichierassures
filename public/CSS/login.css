@@ -1,5 +1,18 @@
 .mb-2 {
-    margin: 150px;
     margin-bottom: .5rem;
+}
+
+/* Ensure the page and body fill the viewport and have no default margins */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Scoped login background to cover viewport without repeating or scrolling */
+.login-body {
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
