@@ -1,18 +1,30 @@
-.mb-2 {
-    margin-bottom: .5rem;
-}
-
-/* Ensure the page and body fill the viewport and have no default margins */
+/* Reset page to avoid unexpected scrollbars */
 html, body {
     height: 100%;
     margin: 0;
+    padding: 0;
+    overflow: hidden; /* remove page scrollbar */
 }
 
-/* Scoped login background to cover viewport without repeating or scrolling */
+/* Background handled by .login-body; image kept inline in Twig template */
 .login-body {
     min-height: 100vh;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    background-attachment: fixed;
 }
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Avoid overriding Bootstrap utility classes like .mb-2 */
+.welcome-title {
+    margin: 0 0 .5rem 0;
+}
+
 
