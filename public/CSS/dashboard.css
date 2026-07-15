@@ -1,11 +1,3 @@
-:root{
-    --logo-1: #FFB199; /* pastel coral */
-    --logo-2: #FFD59A; /* pastel peach */
-    --logo-3: #C8F0A6; /* pastel mint */
-    --logo-4: #E6C7E8; /* pastel lavender */
-    --logo-5: #BEE7FF; /* pastel sky blue */
-    --logo-6: #6E5A9A; /* pastel indigo */
-}
 
 body {
     min-height: 100vh;

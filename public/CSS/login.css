@@ -6,7 +6,7 @@ html, body {
     overflow: hidden; /* supprime la barre de défilement de la page */
 }
 
-/* Image de fond gérée ici : elle couvre tout l'écran sans répétition */
+/* Image de fond couvre tout l'écran sans répétition */
 .login-body {
     min-height: 100vh;
     background-size: cover;
@@ -15,13 +15,6 @@ html, body {
     background-attachment: fixed;
 }
 
-/* Conteneur principal centré verticalement */
-.login-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 /* Ne pas écraser les utilitaires Bootstrap comme .mb-2 */
 .welcome-title {
