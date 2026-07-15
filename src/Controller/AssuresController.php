@@ -9,7 +9,8 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
-// Contrôleur principal pour les pages d'authentification et de tableau de bord.
+// Permet de manipuler la requête HTTP entrante et de lire les paramètres.
+// Cette classe gère les pages publiques et le tableau de bord de l'application.
 final class AssuresController extends AbstractController
 {
     #[Route('/login', name: 'app_assures_login')]
@@ -36,13 +37,15 @@ final class AssuresController extends AbstractController
             'nirBnf' => $request->query->get('nirBnf', ''),
         ];
 
-        // Détermine si des filtres ont été fournis.
+        // Vérifie si l'un au moins des champs de recherche est rempli.
+        // Un tableau vide signifie aucune restriction et affiche la vue standard.
         $hasFilters = array_filter($filters);
         $results = $hasFilters 
             ? $chmListeRepository->searchAssures($filters)
             : $chmListeRepository->findAllForDashboard();
 
         // Ajoute des champs calculés pour l'affichage du tableau de bord.
+        // 'lieuNaissance' est initialisé à vide et la version complète de l'adresse est construite.
         $assures = array_map(function (array $assure): array {
             $assure['lieuNaissance'] = '';
             $assure['adresseComplete'] = $this->formatAdresseComplete($assure);
@@ -51,8 +54,10 @@ final class AssuresController extends AbstractController
         }, $results);
 
         // Charge un fichier PHP externe contenant un utilisateur de test.
+        // Ce fichier fournit une instance temporaire utilisée dans la vue.
         require __DIR__ . '/UsersAssures.php';
 
+        // Rend la page dashboard en transmettant les données des assurés et de l'utilisateur.
         return $this->render('premier_symfony/dashboard.html.twig', [
             'Assures' => $assures,
             'user' => $users1,
@@ -62,11 +67,13 @@ final class AssuresController extends AbstractController
     // Formate une adresse complète à partir des éléments d'adresse de l'assuré.
     private function formatAdresseComplete(array $assure): string
     {
+        // Concatène le type et le libellé de l'adresse en supprimant les valeurs nulles.
         $voie = trim(implode(' ', array_filter([
             $assure['adresseType'] ?? null,
             $assure['adresseLibelle'] ?? null,
         ])));
 
+        // Construit la partie localisation de l'adresse : code postal + commune.
         $ville = trim(implode(' ', array_filter([
             $assure['adresseCodePostal'] ?? null,
             $assure['adresseCommune'] ?? null,

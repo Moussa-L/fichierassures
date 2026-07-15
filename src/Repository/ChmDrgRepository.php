@@ -15,6 +15,9 @@ class ChmDrgRepository extends ServiceEntityRepository
         parent::__construct($registry, ChmDrg::class);
     }
 
+    // Initialise le repository ChmDrg avec le registry Doctrine.
+    // Ce repository gère l'accès aux enregistrements d'adresses.
+
     // Recherche une adresse par le code ASSAC.
     public function findByAssac(string $assac): ?ChmDrg
     {
@@ -27,7 +30,8 @@ class ChmDrgRepository extends ServiceEntityRepository
         return parent::findAll();
     }
 
-    // Récupérer toutes les adresses avec une requête DQL.
+    // Récupère toutes les adresses avec une requête DQL.
+    // Cette méthode peut être utilisée pour charger des résultats avec des relations Doctrine.
     public function findAllWithAssures()
     {
         return $this->createQueryBuilder('d')

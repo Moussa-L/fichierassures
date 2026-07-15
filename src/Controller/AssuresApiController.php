@@ -19,10 +19,11 @@ final class AssuresApiController extends AbstractController
     #[Route('/assures', name: 'api_assures_list', methods: ['GET'])]
     public function listAssures(ChmListeRepository $chmListeRepository): JsonResponse
     {
-        // Appel du repository pour récupérer tous les assurés.
+        // Appel du repository pour récupérer tous les assurés depuis la base de données.
         $assures = $chmListeRepository->findAll();
         
         // Transformation des entités en tableau simple pour la réponse JSON.
+        // Chaque objet est converti en structure clé/valeur propre à l'API.
         $data = array_map(fn($assure) => [
             'nir' => $assure->getAssmacBen(), // NIR principal de l'assuré
             'nirBnf' => $assure->getMacbenBen(), // NIR de la personne bénéficiaire
@@ -46,6 +47,7 @@ final class AssuresApiController extends AbstractController
         $assure = $chmListeRepository->findByNir($nir);
         
         // Si aucun assuré n'est trouvé, on renvoie une erreur 404.
+        // Cela permet à l'API de signaler que l'identifiant demandé est invalide.
         if (!$assure) {
             return $this->json(['error' => 'Assuré non trouvé'], Response::HTTP_NOT_FOUND);
         }

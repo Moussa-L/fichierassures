@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 // Classe utilitaire pour fournir des données de test d'un assuré.
+// Classe utilitaire pour fournir un jeu de données d'assurés de test.
 final class Assures
 {
     public static function getTestData(): array
     {
+        // Retourne un tableau fixe de données simulées pour le développement.
         return [[
             'nir' => '2901199397081',
             'nirBnf' => '1250497612003',

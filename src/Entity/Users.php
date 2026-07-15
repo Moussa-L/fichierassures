@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\UsersRepository;
 
 // Entité représentant un utilisateur du système.
+// Cette classe encapsule le numéro d'agent, le nom complet et le mot de passe.
 class Users
 {
     private ?string $numAgent = null;

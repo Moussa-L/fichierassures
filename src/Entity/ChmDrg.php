@@ -6,6 +6,7 @@ use App\Repository\ChmDrgRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 // Entité représentant l'adresse d'un assuré dans la table chm_drg.
+// Cette classe collecte toutes les informations de localisation.
 #[ORM\Entity(repositoryClass: ChmDrgRepository::class)]
 #[ORM\Table(name: 'chm_drg', schema: 'dbo')]
 class ChmDrg
@@ -35,6 +36,7 @@ class ChmDrg
 
     public function getId(): ?int
     {
+        // Retourne la clé primaire de l'entité adresse.
         return $this->id;
     }
 

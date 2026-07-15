@@ -15,6 +15,9 @@ class CoordonneeRepository extends ServiceEntityRepository
         parent::__construct($registry, Coordonnee::class);
     }
 
+    // Initialise le repository Coordonnee avec le registry Doctrine.
+    // L'entité Coordonnee est mappée aux données de coordonnées d'assuré.
+
     // Recherche une coordonnée par le NIR de l'assuré.
     public function findByNir(string $nir): ?Coordonnee
     {

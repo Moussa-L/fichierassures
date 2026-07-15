@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CoordonneeRepository;
 
 // Entité pour représenter les coordonnées détaillées d'un assuré.
+// Les propriétés sont utilisées pour stocker les informations personnelles et l'adresse.
 class Coordonnee
 {
     private ?string $nirAss = null;
@@ -22,9 +23,11 @@ class Coordonnee
     }
 
     public function getNir(){
+        // Retourne le NIR principal de l'assuré.
         return $this->nirAss; 
     }
     public function setNir(string $nirAss){
+        // Définit le NIR principal de l'assuré.
         $this->nirAss = $nirAss;
         return $this;
     }

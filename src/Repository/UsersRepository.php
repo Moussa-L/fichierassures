@@ -15,6 +15,9 @@ class UsersRepository extends ServiceEntityRepository
         parent::__construct($registry, Users::class);
     }
 
+    // Initialise le repository Users avec le registry Doctrine.
+    // Ce constructeur configure l'accès à la table associée à l'entité.
+
     // Recherche un utilisateur par son numéro d'agent.
     public function findByNumAgent(string $numAgent): ?Users
     {

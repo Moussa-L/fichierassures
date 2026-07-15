@@ -30,7 +30,9 @@ class ChmListeRepository extends ServiceEntityRepository
     // Récupère les données nécessaires pour le tableau de bord.
     public function findAllForDashboard(int $limit = 1000): array
     {
+        // Limite le nombre de lignes retournées pour éviter une surcharge mémoire.
         $safeLimit = max(1, min(5000, $limit));
+        // Requête SQL brute optimisée pour le tableau de bord.
         $sql = <<<SQL
             SELECT TOP {$safeLimit}
                 l.[ASSMAC_BEN] AS nir,
@@ -56,6 +58,8 @@ class ChmListeRepository extends ServiceEntityRepository
     }
 
     // Recherche d'assurés avec filtres dynamiques pour le tableau de bord.
+    // Les clauses WHERE sont construites uniquement pour les filtres fournis.
+    // Les critères sont appliqués seulement si les valeurs sont présentes.
     public function searchAssures(array $filters, int $limit = 1000): array
     {
         $safeLimit = max(1, min(5000, $limit));
@@ -91,6 +95,7 @@ class ChmListeRepository extends ServiceEntityRepository
             $params[] = $filters['dateTraitement'];
         }
 
+        // Crée une clause WHERE sécurisée en fonction des paramètres disponibles.
         $whereClause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
 
         $sql = <<<SQL

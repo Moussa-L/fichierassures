@@ -6,6 +6,7 @@ use App\Repository\ChmListeRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 // Entité représentant un assuré dans la table chm_liste.
+// Les annotations ORM établissent la correspondance avec la base de données.
 #[ORM\Entity(repositoryClass: ChmListeRepository::class)]
 #[ORM\Table(name: 'chm_liste', schema: 'dbo')]
 class ChmListe
@@ -31,11 +32,13 @@ class ChmListe
 
     public function getAssmacBen(): ?string
     {
+        // Retourne le NIR principal de l'assuré.
         return $this->assmacBen;
     }
 
     public function setAssmacBen(string $assmacBen): self
     {
+        // Définit le NIR principal de l'assuré.
         $this->assmacBen = $assmacBen;
         return $this;
     }
