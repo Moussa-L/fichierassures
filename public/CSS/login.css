@@ -1,20 +1,22 @@
-/* Reset page to avoid unexpected scrollbars */
+/* Réinitialise la page pour éviter les barres de défilement inattendues */
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* remove page scrollbar */
+    overflow: hidden; /* supprime la barre de défilement de la page */
 }
 
-/* Background handled by .login-body; image kept inline in Twig template */
+/* Image de fond gérée ici : elle couvre tout l'écran sans répétition */
 .login-body {
     min-height: 100vh;
+    background-image: url('/images/cssm.png'); /* chemin depuis la racine publique */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
+/* Conteneur principal centré verticalement */
 .login-page {
     min-height: 100vh;
     display: flex;
@@ -22,7 +24,7 @@ html, body {
     justify-content: center;
 }
 
-/* Avoid overriding Bootstrap utility classes like .mb-2 */
+/* Ne pas écraser les utilitaires Bootstrap comme .mb-2 */
 .welcome-title {
     margin: 0 0 .5rem 0;
 }
