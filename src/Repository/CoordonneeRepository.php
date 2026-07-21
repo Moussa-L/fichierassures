@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 // Définit des méthodes pour rechercher des coordonnées d'assurés.
 class CoordonneeRepository extends ServiceEntityRepository
 {
+    // Initialise le repository de coordonnées avec l'entité associée.
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Coordonnee::class);

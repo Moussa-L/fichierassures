@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 // Gère les adresses des assurés et les opérations de recherche associées.
 class ChmDrgRepository extends ServiceEntityRepository
 {
+    // Initialise le repository dédié aux adresses des assurés.
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ChmDrg::class);

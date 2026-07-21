@@ -6,6 +6,7 @@ namespace App\Controller;
 // Classe utilitaire pour fournir un jeu de données d'assurés de test.
 final class Assures
 {
+    // Fournit un jeu de données statique utilisé pour les tests et le développement.
     public static function getTestData(): array
     {
         // Retourne un tableau fixe de données simulées pour le développement.

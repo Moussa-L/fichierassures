@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AssuresController extends AbstractController
 {
+    // Point d'entrée principal du contrôleur d'authentification et du tableau de bord.
     #[Route('/login', name: 'app_assures_login', methods: ['GET', 'POST'])]
     public function index(Request $request, Connection $connection): Response
     {

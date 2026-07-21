@@ -8,6 +8,7 @@ use App\Repository\CoordonneeRepository;
 // Les propriétés sont utilisées pour stocker les informations personnelles et l'adresse.
 class Coordonnee
 {
+    // Stocke les informations détaillées d'un assuré et de son adresse.
     private ?string $nirAss = null;
     private ?string $nirBnf = null;
     private ?string $nom = null;

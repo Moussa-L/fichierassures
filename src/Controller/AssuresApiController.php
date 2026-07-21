@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 #[Route('/api')]
 final class AssuresApiController extends AbstractController
 {
+    // API REST dédiée à la consultation des assurés et de leurs adresses.
     /**
      * Récupérer tous les assurés
      */

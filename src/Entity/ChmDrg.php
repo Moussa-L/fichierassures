@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'chm_drg', schema: 'dbo')]
 class ChmDrg
 {
+    // Propriétés représentant les informations d'adresse d'un assuré.
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(name: 'id', type: 'integer')]

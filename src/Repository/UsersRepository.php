@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 // Fournit des méthodes dédiées pour récupérer les utilisateurs.
 class UsersRepository extends ServiceEntityRepository
 {
+    // Initialise le repository d'utilisateurs pour l'accès aux données.
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Users::class);

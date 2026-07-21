@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'chm_liste', schema: 'dbo')]
 class ChmListe
 {
+    // Propriétés mappées à la table chm_liste du schéma dbo.
     #[ORM\Id]
     #[ORM\Column(name: 'ASSMAC_BEN', type: 'string', length: 50)]
     private ?string $assmacBen = null;

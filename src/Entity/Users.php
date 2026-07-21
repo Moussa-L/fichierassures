@@ -8,6 +8,7 @@ use App\Repository\UsersRepository;
 // Cette classe encapsule le numéro d'agent, le nom complet et le mot de passe.
 class Users
 {
+    // Propriétés principales d'un utilisateur du système.
     private ?string $numAgent = null;
     private ?string $nomPrenom = null;
     private ?string $password = null;

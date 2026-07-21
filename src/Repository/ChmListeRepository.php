@@ -10,6 +10,7 @@ use Doctrine\Persistence\ManagerRegistry;
 // Contient des requêtes personnalisées pour le tableau de bord et la recherche.
 class ChmListeRepository extends ServiceEntityRepository
 {
+    // Initialise le repository avec l'entité ChmListe et le registre Doctrine.
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ChmListe::class);

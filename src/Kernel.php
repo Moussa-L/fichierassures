@@ -10,5 +10,6 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 // pour permettre une configuration minimale et la gestion des routes.
 class Kernel extends BaseKernel
 {
+    // Point d'entrée du kernel Symfony de l'application.
     use MicroKernelTrait;
 }
