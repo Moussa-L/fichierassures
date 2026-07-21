@@ -80,6 +80,54 @@ class ChmListeRepository extends ServiceEntityRepository
             ->fetchAllAssociative();
     }
 
+    private function buildDateSearchCondition(string $value, string $column): array
+    {
+        $value = trim((string) $value);
+
+        if ($value === '') {
+            return ['', []];
+        }
+
+        $normalizedValue = str_replace('-', '/', $value);
+        $normalizedValue = preg_replace('/\s+/', '', $normalizedValue);
+
+        if (!preg_match('/^(\d{1,2})(?:\/(\d{1,2}))?(?:\/(\d{4}))?$/', $normalizedValue, $matches)) {
+            return ['CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ?', ['%' . $normalizedValue . '%']];
+        }
+
+        $day = isset($matches[1]) ? (int) $matches[1] : null;
+        $month = isset($matches[2]) ? (int) $matches[2] : null;
+        $year = isset($matches[3]) ? (int) $matches[3] : null;
+
+        if ($day !== null && $month !== null && $year !== null) {
+            $pattern = sprintf('%02d/%02d/%04d', $day, $month, $year);
+            return ['CONVERT(VARCHAR(10), ' . $column . ', 103) = ?', [$pattern]];
+        }
+
+        if ($day !== null && $month !== null) {
+            $pattern = sprintf('%02d/%02d/%%', $day, $month);
+            return ['CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ?', [$pattern]];
+        }
+
+        if ($day !== null) {
+            $dayPattern = sprintf('%02d/%%', $day);
+            $monthPattern = sprintf('%%/%02d/%%', $day);
+            return ['(CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ? OR CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ?)', [$dayPattern, $monthPattern]];
+        }
+
+        if ($month !== null) {
+            $monthPattern = sprintf('%%/%02d/%%', $month);
+            return ['CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ?', [$monthPattern]];
+        }
+
+        if ($year !== null) {
+            $yearPattern = sprintf('%%/%04d', $year);
+            return ['CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ?', [$yearPattern]];
+        }
+
+        return ['CONVERT(VARCHAR(10), ' . $column . ', 103) LIKE ?', ['%' . $normalizedValue . '%']];
+    }
+
     // Recherche d'assurés avec filtres dynamiques pour le tableau de bord.
     // Les clauses WHERE sont construites uniquement pour les filtres fournis.
     // Les critères sont appliqués seulement si les valeurs sont présentes.
@@ -119,14 +167,22 @@ class ChmListeRepository extends ServiceEntityRepository
             $params[] = '%' . $filters['prenom'] . '%';
         }
         // Ajoute un critère de recherche si la date de naissance est fournie.
+        // La recherche accepte une saisie partielle comme 04 ou 04/05 pour retrouver les résultats attendus.
         if (!empty($filters['dateNaissance'])) {
-            $where[] = 'CONVERT(VARCHAR(10), l.[NAIDAT_B], 103) = ?';
-            $params[] = $filters['dateNaissance'];
+            [$dateWhere, $dateParams] = $this->buildDateSearchCondition($filters['dateNaissance'], 'l.[NAIDAT_B]');
+            if ($dateWhere !== '') {
+                $where[] = $dateWhere;
+                $params = array_merge($params, $dateParams);
+            }
         }
         // Ajoute un critère de recherche si la date de traitement est fournie.
+        // La recherche accepte également une saisie partielle pour ce champ.
         if (!empty($filters['dateTraitement'])) {
-            $where[] = 'CONVERT(VARCHAR(10), l.[JODDSD_J], 103) = ?';
-            $params[] = $filters['dateTraitement'];
+            [$dateWhere, $dateParams] = $this->buildDateSearchCondition($filters['dateTraitement'], 'l.[JODDSD_J]');
+            if ($dateWhere !== '') {
+                $where[] = $dateWhere;
+                $params = array_merge($params, $dateParams);
+            }
         }
 
         // Crée une clause WHERE sécurisée en fonction des paramètres disponibles.
