@@ -71,10 +71,11 @@
                         <label class="form-label">Date de naissance</label>
                         <input type="text" class="form-control" name="dateNaissance" value="{{ app.request.query.get('dateNaissance', '') }}">
                     </div>
-                    <div class="col-md-4">
+                    
+                    {#<div class="col-md-4">
                         <label class="form-label">Numéro compostage</label>
                         <input type="text" class="form-control" name="macben" value="{{ app.request.query.get('macben', '') }}">
-                    </div>
+                    </div>#}
                     <div class="col-12 d-flex gap-2">
                         <button type="submit" class="btn btn-primary">Rechercher</button>
                         <a href="{{ path('dashBoard') }}" class="btn btn-outline-secondary">Réinitialiser</a>
@@ -95,7 +96,7 @@
                                 <th>Prénom</th>
                                 <th>Date naissance</th>
                                 <th>Adresse</th>
-                                {#<th>Date de traitement</th>#}
+                                <th>Date de traitement</th>
                             </tr>
                         </thead>
                         <tbody id="corpsTableau">
@@ -107,7 +108,7 @@
                             <td>{{ a.prenom }}</td>
                             <td>{{ a.dateNaissance ?: '' }}</td>
                             <td>{{ a.adresseComplete }}</td>
-                            {#<td>{{ a.dateTraitement ?: '' }}</td>#}
+                            <td>{{ a.dateTraitement ?: '' }}</td>
                         </tr>
                         {% else %}
                             <tr><td colspan="7" class="text-center py-4">Aucun résultat</td></tr>
