@@ -25,6 +25,7 @@ class ChmListeRepository extends ServiceEntityRepository
     // Récupère tous les enregistrements de la table chm_liste.
     public function findAll(): array
     {
+        // Retourne tous les enregistrements de la table chm_liste via Doctrine.
         return parent::findAll();
     }
 
@@ -32,11 +33,13 @@ class ChmListeRepository extends ServiceEntityRepository
     public function findAllForDashboard(int $limit = 1000): array
     {
         // Limite le nombre de lignes retournées pour éviter une surcharge mémoire.
+        // La valeur est bornée entre 1 et 5000 pour garder une exécution stable.
         $safeLimit = max(1, min(5000, $limit));
         // Requête SQL brute optimisée pour le tableau de bord.
         // Cette requête sélectionne les informations principales de l'assuré
         // depuis la table `chm_liste` et joint les informations d'adresse
         // depuis la table `chm_drg` si elles existent.
+        // Le résultat est ensuite transformé en tableau associatif utilisé par la vue.
         // Les alias `l` et `d` permettent de référencer les deux tables
         // de manière concise dans la sélection et le JOIN.
         $sql = <<<SQL
@@ -82,40 +85,53 @@ class ChmListeRepository extends ServiceEntityRepository
     // Les critères sont appliqués seulement si les valeurs sont présentes.
     public function searchAssures(array $filters, int $limit = 1000): array
     {
+        // Garantit une limite sûre afin d'éviter un traitement excessif des données.
+        // Cette borne protège l'application contre des requêtes trop volumineuses.
         $safeLimit = max(1, min(5000, $limit));
+        // Tableau des clauses WHERE à construire dynamiquement.
         $where = [];
+        // Paramètres associés aux filtres de recherche.
         $params = [];
 
+        // Ajoute un critère de recherche si le filtre NIR est renseigné.
         if (!empty($filters['nir'])) {
             $where[] = 'l.[ASSMAC_BEN] LIKE ?';
             $params[] = '%' . $filters['nir'] . '%';
         }
+        // Ajoute un critère de recherche si le filtre MACBEN est renseigné.
         if (!empty($filters['macben'])) {
             $where[] = 'l.[MACBEN_BEN] LIKE ?';
             $params[] = '%' . $filters['macben'] . '%';
         }
+        // Ajoute un critère de recherche si le filtre NIR bénéficiaire est renseigné.
         if (!empty($filters['nirBnf'])) {
             $where[] = 'l.[MACBEN_BEN] LIKE ?';
             $params[] = '%' . $filters['nirBnf'] . '%';
         }
+        // Ajoute un critère de recherche si le filtre nom est renseigné.
         if (!empty($filters['nom'])) {
             $where[] = 'l.[NOMSTD_BEN] LIKE ?';
             $params[] = '%' . $filters['nom'] . '%';
         }
+        // Ajoute un critère de recherche si le filtre prénom est renseigné.
         if (!empty($filters['prenom'])) {
             $where[] = 'l.[NOMPRM_BEN] LIKE ?';
             $params[] = '%' . $filters['prenom'] . '%';
         }
+        // Ajoute un critère de recherche si la date de naissance est fournie.
         if (!empty($filters['dateNaissance'])) {
             $where[] = 'CONVERT(VARCHAR(10), l.[NAIDAT_B], 103) = ?';
             $params[] = $filters['dateNaissance'];
         }
+        // Ajoute un critère de recherche si la date de traitement est fournie.
         if (!empty($filters['dateTraitement'])) {
             $where[] = 'CONVERT(VARCHAR(10), l.[JODDSD_J], 103) = ?';
             $params[] = $filters['dateTraitement'];
         }
 
         // Crée une clause WHERE sécurisée en fonction des paramètres disponibles.
+        // Si aucun filtre n'est fourni, la requête s'exécute sans restriction supplémentaire.
+        // Les filtres ajoutés sont combinés avec des AND afin de respecter tous les critères fournis.
         $whereClause = !empty($where) ? 'WHERE ' . implode(' AND ', $where) : '';
 
         $sql = <<<SQL
@@ -147,6 +163,8 @@ class ChmListeRepository extends ServiceEntityRepository
             ORDER BY l.[JODDSD_J] DESC
         SQL;
 
+        // Exécute la requête SQL construite dynamiquement avec les paramètres fournis.
+        // Le résultat est récupéré sous forme de tableau associatif prêt à être utilisé par le contrôleur.
         return $this->getEntityManager()
             ->getConnection()
             ->executeQuery($sql, $params)

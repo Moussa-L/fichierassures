@@ -9,14 +9,22 @@ use App\Repository\UsersRepository;
 class Users
 {
     // Propriétés principales d'un utilisateur du système.
+    // Identifiant unique de l'agent utilisateur.
     private ?string $numAgent = null;
+    // Nom et prénom complet de l'utilisateur.
     private ?string $nomPrenom = null;
+    // Mot de passe stocké en mémoire pour l'usage du système.
     private ?string $password = null;
 
+    // Initialise un nouvel utilisateur avec ses informations de base.
+    // Les trois paramètres fournis correspondent aux données minimales nécessaires à la création d'un utilisateur.
     public function __construct (string $numAgent, string $nomPrenom, string $password)
     {
+        // Affecte l'identifiant de l'agent.
         $this->numAgent = $numAgent;
+        // Affecte le nom complet de l'utilisateur.
         $this->nomPrenom = $nomPrenom;
+        // Affecte le mot de passe utilisateur.
         $this->password = $password;
     }
 

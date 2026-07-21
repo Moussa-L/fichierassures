@@ -20,12 +20,14 @@ class CoordonneeRepository extends ServiceEntityRepository
     // L'entité Coordonnee est mappée aux données de coordonnées d'assuré.
 
     // Recherche une coordonnée par le NIR de l'assuré.
+    // Le NIR sert d'identifiant unique pour retrouver les données coordonnées liées à cet assuré.
     public function findByNir(string $nir): ?Coordonnee
     {
         return $this->findOneBy(['nirAss' => $nir]);
     }
 
     // Récupère toutes les coordonnées.
+    // Cette méthode charge l'ensemble des lignes de coordonnées disponibles.
     public function findAll(): array
     {
         return parent::findAll();

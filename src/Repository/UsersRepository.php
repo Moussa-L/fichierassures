@@ -20,12 +20,14 @@ class UsersRepository extends ServiceEntityRepository
     // Ce constructeur configure l'accès à la table associée à l'entité.
 
     // Recherche un utilisateur par son numéro d'agent.
+    // Le numéro d'agent est utilisé comme clé de recherche principale pour identifier un compte utilisateur.
     public function findByNumAgent(string $numAgent): ?Users
     {
         return $this->findOneBy(['numAgent' => $numAgent]);
     }
 
     // Récupère tous les utilisateurs.
+    // Cette méthode permet de lister l'ensemble des comptes utilisateur.
     public function findAll(): array
     {
         return parent::findAll();

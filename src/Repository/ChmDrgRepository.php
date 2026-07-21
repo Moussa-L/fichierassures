@@ -20,12 +20,14 @@ class ChmDrgRepository extends ServiceEntityRepository
     // Ce repository gère l'accès aux enregistrements d'adresses.
 
     // Recherche une adresse par le code ASSAC.
+    // Le code ASSAC est utilisé comme identifiant principal de l'adresse de l'assuré.
     public function findByAssac(string $assac): ?ChmDrg
     {
         return $this->findOneBy(['assacDrg' => $assac]);
     }
 
     // Récupère toutes les adresses.
+    // Cette méthode retourne la liste complète des adresses disponibles.
     public function findAll(): array
     {
         return parent::findAll();
@@ -33,6 +35,7 @@ class ChmDrgRepository extends ServiceEntityRepository
 
     // Récupère toutes les adresses avec une requête DQL.
     // Cette méthode peut être utilisée pour charger des résultats avec des relations Doctrine.
+    // Elle permet de travailler avec des objets Doctrine au lieu d'un simple tableau de résultats.
     public function findAllWithAssures()
     {
         return $this->createQueryBuilder('d')
