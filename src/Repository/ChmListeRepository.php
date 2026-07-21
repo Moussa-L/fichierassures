@@ -41,8 +41,6 @@ class ChmListeRepository extends ServiceEntityRepository
         $sql = <<<SQL
 
             SELECT TOP {$safeLimit}
-                
-                //
                 l.[ASSMAC_BEN] AS nir,
 
                 l.[MACBEN_BEN] AS nirBnf,
