@@ -10,7 +10,14 @@
 </head>
 
     <body style="margin: 0; min-height: 100vh; background-image: url('{{ asset('images/cssm.png') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
-        <div class="min-vh-100 d-flex flex-column" style="padding-top: 5px;">
+
+        <header class="position-absolute top-0 start-0 p-3" style="z-index: 10;">
+            <a href="{{ path('app_assures_login') }}" class="d-inline-block">
+                <img src="{{ asset('images/logo.jpg') }}" alt="Logo" width="75" height="75" class="img-fluid">
+            </a>
+        </header>
+
+        <div class="min-vh-100 d-flex flex-column justify-content-center" style="padding-top: 5px;">
             <div class="text-center px-3">
                 <h1 class="mb-2 text-white">Bienvenue</h1>
                 <h3 class="text-white">dans l'application web Fichier des Assurés</h3>
