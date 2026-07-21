@@ -3,9 +3,17 @@ body {
     min-height: 100vh;
 }
 
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+}
+
 .logo-dashboard {
     margin-left: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+    box-shadow: none;
+    border-radius: 0;
+    object-fit: contain;
 }
 
 .titre-dashboard {
