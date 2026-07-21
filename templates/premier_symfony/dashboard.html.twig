@@ -29,7 +29,9 @@
                     <a class="nav-link text-dark fw-semibold" href="#"><i class="bi bi-person-fill icone-profil"></i> {{ user.nomPrenom }}</a>
                 </div>
                 <div class="nav-item">
-                    <i class="bi bi-power text-dark icone-power" id="bouttonDeco"></i>
+                    <a class="nav-link text-dark fw-semibold" href="{{ path('app_assures_logout') }}" title="Déconnexion">
+                        <i class="bi bi-power text-dark icone-power" id="bouttonDeco"></i>
+                    </a>
                 </div>
             </div>
         </div>

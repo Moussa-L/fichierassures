@@ -2,31 +2,70 @@
 
 namespace App\Controller;
 
-use App\Entity\Users;
 use App\Repository\ChmListeRepository;
+use Doctrine\DBAL\Connection;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
 
-// Permet de manipuler la requête HTTP entrante et de lire les paramètres.
-// Cette classe gère les pages publiques et le tableau de bord de l'application.
 final class AssuresController extends AbstractController
 {
-    #[Route('/login', name: 'app_assures_login')]
-    public function index(): Response
+    #[Route('/login', name: 'app_assures_login', methods: ['GET', 'POST'])]
+    public function index(Request $request, Connection $connection): Response
     {
-        // Affiche la page de connexion.
+        $session = $request->getSession();
+
+        if ($session->has('user')) {
+            return $this->redirectToRoute('dashBoard');
+        }
+
+        $error = null;
+
+        if ($request->isMethod('POST')) {
+            $login = trim((string) $request->request->get('login', ''));
+            $password = trim((string) $request->request->get('password', ''));
+
+            $user = $connection->fetchAssociative(
+                'SELECT [login], [password], [Nom] FROM tab_users WHERE [login] = :login AND [password] = :password',
+                [
+                    'login' => $login,
+                    'password' => $password,
+                ]
+            );
+
+            if ($user) {
+                $session->set('user', [
+                    'login' => $user['login'],
+                    'nom' => $user['Nom'],
+                ]);
+
+                return $this->redirectToRoute('dashBoard');
+            }
+
+            $error = 'Identifiants incorrects.';
+        }
+
         return $this->render('premier_symfony/login.html.twig', [
-            //'LesUsers' => $LesUsers,
+            'error' => $error,
         ]);
     }
 
-    // Route pour la page du tableau de bord
+    #[Route('/logout', name: 'app_assures_logout')]
+    public function logout(Request $request): Response
+    {
+        $request->getSession()->remove('user');
+
+        return $this->redirectToRoute('app_assures_login');
+    }
+
     #[Route('/dashboard', name: 'dashBoard')]
     public function dashBord(Request $request, ChmListeRepository $chmListeRepository): Response
     {
-        // Lecture des filtres de recherche depuis la query string.
+        if (!$request->getSession()->has('user')) {
+            return $this->redirectToRoute('app_assures_login');
+        }
+
         $filters = [
             'nir' => $request->query->get('nir', ''),
             'macben' => $request->query->get('macben', ''),
@@ -37,15 +76,11 @@ final class AssuresController extends AbstractController
             'nirBnf' => $request->query->get('nirBnf', ''),
         ];
 
-        // Vérifie si l'un au moins des champs de recherche est rempli.
-        // Un tableau vide signifie aucune restriction et affiche la vue standard.
         $hasFilters = array_filter($filters);
-        $results = $hasFilters 
+        $results = $hasFilters
             ? $chmListeRepository->searchAssures($filters)
             : $chmListeRepository->findAllForDashboard();
 
-        // Ajoute des champs calculés pour l'affichage du tableau de bord.
-        // 'lieuNaissance' est initialisé à vide et la version complète de l'adresse est construite.
         $assures = array_map(function (array $assure): array {
             $assure['lieuNaissance'] = '';
             $assure['adresseComplete'] = $this->formatAdresseComplete($assure);
@@ -53,27 +88,23 @@ final class AssuresController extends AbstractController
             return $assure;
         }, $results);
 
-        // Charge un fichier PHP externe contenant un utilisateur de test.
-        // Ce fichier fournit une instance temporaire utilisée dans la vue.
-        require __DIR__ . '/UsersAssures.php';
+        $user = $request->getSession()->get('user', []);
 
-        // Rend la page dashboard en transmettant les données des assurés et de l'utilisateur.
         return $this->render('premier_symfony/dashboard.html.twig', [
             'Assures' => $assures,
-            'user' => $users1,
+            'user' => [
+                'nomPrenom' => $user['nom'] ?? $user['login'] ?? 'Utilisateur',
+            ],
         ]);
     }
 
-    // Formate une adresse complète à partir des éléments d'adresse de l'assuré.
     private function formatAdresseComplete(array $assure): string
     {
-        // Concatène le type et le libellé de l'adresse en supprimant les valeurs nulles.
         $voie = trim(implode(' ', array_filter([
             $assure['adresseType'] ?? null,
             $assure['adresseLibelle'] ?? null,
         ])));
 
-        // Construit la partie localisation de l'adresse : code postal + commune.
         $ville = trim(implode(' ', array_filter([
             $assure['adresseCodePostal'] ?? null,
             $assure['adresseCommune'] ?? null,
