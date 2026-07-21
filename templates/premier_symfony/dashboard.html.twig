@@ -29,8 +29,8 @@
                     <a class="nav-link text-dark fw-semibold" href="#"><i class="bi bi-person-fill icone-profil"></i> {{ user.nomPrenom }}</a>
                 </div>
                 <div class="nav-item">
-                    <a class="nav-link text-dark fw-semibold" href="{{ path('app_assures_logout') }}" title="Déconnexion">
-                        <i class="bi bi-power text-dark icone-power" id="bouttonDeco"></i>
+                    <a class="nav-link text-dark" href="{{ path('app_assures_logout') }}" title="Déconnexion">
+                        <i class="bi bi-power icone-power"></i>
                     </a>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                             <td>{{ a.dateTraitement ?: '' }}</td>
                         </tr>
                         {% else %}
-                        <tr><td colspan="7" class="text-center py-4">Aucun résultat</td></tr>
+                            <tr><td colspan="7" class="text-center py-4">Aucun résultat</td></tr>
                         {% endfor %}
                         </tbody>
                     </table>
