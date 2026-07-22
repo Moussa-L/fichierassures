@@ -44,38 +44,47 @@
             <p class="text-muted">Recherche et consultation rapide des assurés</p>
         </div>
 
-        <section class="card shadow-sm border-0 mb-4">
+        <div class="mx-auto mb-4" style="max-width: 980px;">
+        <section class="card shadow-lg border-0 rounded-4">
             <div class="card-body">
+                {# Le formulaire envoie une requête HTTP GET vers la route nommée "dashBoard". Symfony construit l'adresse exacte de cette route grâce à path('dashBoard').
+                Cette route vient du contrôleur : src/Controller/AssuresController.php, ligne avec #[Route('/dashboard', name: 'dashBoard')]. Donc path('dashBoard') génère l'adresse exacte /dashboard automatiquement. #}
                 <form class="row g-3" method="GET" action="{{ path('dashBoard') }}">
                     <div class="col-md-4">
                         <label class="form-label">NIR</label>
+                        {# inspecte le paramètre GET 'nir' de la requête HTTP courante et le réinjecte dans le champ. #}
                         <input type="text" class="form-control" name="nir" value="{{ app.request.query.get('nir', '') }}">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">NIR (BNF)</label>
+                        {#  inspecte le paramètre GET 'nirBnf' depuis l'adresse exacte /dashboard?nirBnf=... de la requête HTTP. #}
                         <input type="text" class="form-control" name="nirBnf" value="{{ app.request.query.get('nirBnf', '') }}">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Date de traitement</label>
+                        {# inspecte le paramètre GET 'dateTraitement' depuis la requête. #}
                         <input type="text" class="form-control" name="dateTraitement" value="{{ app.request.query.get('dateTraitement', '') }}">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Prénom</label>
+                        {# inspecte le paramètre GET 'prenom' depuis l'adresse exacte /dashboard?prenom=... de la requête HTTP. #}
                         <input type="text" class="form-control" name="prenom" value="{{ app.request.query.get('prenom', '') }}">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Nom</label>
+                        {# inspecte le paramètre GET 'nom' depuis la requête courante. #}
                         <input type="text" class="form-control" name="nom" value="{{ app.request.query.get('nom', '') }}">
                     </div>
                     <div class="col-md-4">
                         <label class="form-label">Date de naissance</label>
+                        {# inspecte le paramètre GET 'dateNaissance' depuis l'adresse exacte /dashboard?dateNaissance=... de la requête HTTP. #}
                         <input type="text" class="form-control" name="dateNaissance" value="{{ app.request.query.get('dateNaissance', '') }}">
                     </div>
                     
-                    {#<div class="col-md-4">
+                    {# <div class="col-md-4">
                         <label class="form-label">Numéro compostage</label>
                         <input type="text" class="form-control" name="macben" value="{{ app.request.query.get('macben', '') }}">
-                    </div>#}
+                    </div> #}
                     <div class="col-12 d-flex gap-2">
                         <button type="submit" class="btn btn-primary">Rechercher</button>
                         <a href="{{ path('dashBoard') }}" class="btn btn-outline-secondary">Réinitialiser</a>
@@ -83,8 +92,9 @@
                 </form>
             </div>
         </section>
+        </div>
 
-        <section class="card shadow-sm border-0">
+        <section class="card shadow-lg border-0 rounded-4">
             <div class="card-body p-0">
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0" id="resultats">
