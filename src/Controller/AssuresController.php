@@ -102,9 +102,9 @@ final class AssuresController extends AbstractController
     #[Route('/calculnir', name: 'calculnir', methods: ['GET'])]
     public function calculNir(Request $request): Response
     {
-        // Route de test accessible en GET.
-        // Actuellement, elle renvoie simplement un texte pour vérifier que la route fonctionne.
-        return new Response('Route calculnir activée.');
+        // Route accessible en GET.
+        // Elle affiche désormais le template dédié au calcul NIR.
+        return $this->render('calculNir.html.twig');
     }
 
     #[Route('/dashboard', name: 'dashboard')]
