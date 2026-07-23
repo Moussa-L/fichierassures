@@ -22,9 +22,9 @@
             <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
         {% endif %}
     </head>
-    <body class="bg-info-subtle">
+    <body class="{% block body_class %}bg-info-subtle{% endblock %}">
         {% include '_navbar.html.twig' %}
-        {% block body %} {% endblock %}
+        {% block body %}{% endblock %}
     </body>
 </html>
 
