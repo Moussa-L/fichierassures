@@ -9,6 +9,16 @@ body {
     z-index: 1030;
 }
 
+.navbar .nav-item {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-user-item .nav-link {
+    margin-bottom: 0;
+    line-height: 1;
+}
+
 .logo-dashboard {
     box-shadow: none;
     border-radius: 0;
