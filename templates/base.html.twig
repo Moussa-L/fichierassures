@@ -23,7 +23,8 @@
         {% endif %}
     </head>
     <body class="bg-info-subtle">
-        {% block body %}{% endblock %}
+        {% include '_navbar.html.twig' %}
+        {% block body %} {% endblock %}
     </body>
 </html>
 
