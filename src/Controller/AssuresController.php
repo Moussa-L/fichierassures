@@ -11,33 +11,40 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class AssuresController extends AbstractController
 {
-    // Point d'entrée principal du contrôleur d'authentification et du tableau de bord.
+    // Contrôleur principal des assurés.
+    // Cette classe gère :
+    // - l'affichage et la validation du formulaire de connexion,
+    // - la déconnexion,
+    // - la redirection de la page racine vers la bonne destination,
+    // - l'accès au tableau de bord authentifié,
+    // - une route de test pour le calcul NIR.
+    // Les routes sont définies directement en attributs Symfony pour lier chaque méthode à son URL.
     #[Route('/login', name: 'app_assures_login', methods: ['GET', 'POST'])]
     public function index(Request $request, Connection $connection): Response
     {
         // Récupère la session HTTP pour vérifier si un utilisateur est déjà connecté.
-        // La session stocke l'état de l'authentification entre les requêtes et permet de conserver l'utilisateur connecté d'une page à l'autre.
+        // La session permet de conserver l'état d'authentification entre les pages et les requêtes successives.
         $session = $request->getSession();
 
-        // Si une session utilisateur existe, on redirige directement vers le tableau de bord.
-        // Cela évite de demander une nouvelle connexion à un utilisateur déjà identifié et permet de conserver l'expérience utilisateur fluide.
+        // Si une session utilisateur est déjà active, la méthode ne réaffiche pas le formulaire de connexion.
+        // Elle redirige immédiatement vers le tableau de bord pour éviter la double authentification.
         if ($session->has('user')) {
             return $this->redirectToRoute('dashboard');
         }
 
-        // Variable utilisée pour afficher un message d'erreur en cas d'échec de connexion.
-        // Elle reste vide tant qu'aucune erreur n'est survenue, puis reçoit le texte d'erreur si la vérification échoue.
+        // Prépare un message d'erreur vide, qui sera utilisé uniquement si l'utilisateur entre de mauvais identifiants.
         $error = null;
 
-        // Traitement du formulaire de connexion lorsqu'une requête POST est envoyée.
+        // Détecte l'envoi du formulaire de connexion via la méthode POST.
+        // C'est dans ce bloc que le login et le mot de passe saisis sont récupérés et vérifiés.
         if ($request->isMethod('POST')) {
-            // Nettoie les valeurs saisies avant vérification.
-            // trim() supprime les espaces en début et fin de chaîne afin d'éviter des erreurs de comparaison dues à une saisie mal formatée.
+            // Récupère les valeurs saisies par l'utilisateur depuis le corps de la requête.
+            // trim() nettoie les espaces en début et en fin pour éviter les faux échecs de comparaison.
             $login = trim((string) $request->request->get('login', ''));
             $password = trim((string) $request->request->get('password', ''));
 
-            // Vérifie l'existence de l'utilisateur dans la base de données via une requête directe.
-            // La requête compare le login et le mot de passe fournis avec ceux enregistrés dans la table des utilisateurs.
+            // Exécute une requête SQL pour retrouver l'utilisateur correspondant aux identifiants fournis.
+            // Le résultat est un tableau associatif contenant les champs demandés si l'utilisateur existe.
             $user = $connection->fetchAssociative(
                 'SELECT [login], [password], [Nom] FROM tab_users WHERE [login] = :login AND [password] = :password',
                 [
@@ -46,22 +53,24 @@ final class AssuresController extends AbstractController
                 ]
             );
 
-            // Si l'utilisateur est trouvé, on enregistre ses informations en session.
-            // Les données stockées sont ensuite utilisées par les vues et les contrôleurs suivants pour personnaliser l'affichage et contrôler l'accès.
+            // Si l'utilisateur existe en base, on stocke les informations essentielles en session.
+            // Ces données sont utilisées comme preuve d'authentification pour les prochaines actions.
             if ($user) {
                 $session->set('user', [
                     'login' => $user['login'],
                     'nom' => $user['Nom'],
                 ]);
 
+                // Après une connexion valide, on renvoie l'utilisateur vers son espace privé.
                 return $this->redirectToRoute('dashboard');
             }
 
-            // Message affiché si les identifiants ne correspondent à aucun utilisateur.
+            // Si aucun utilisateur n'est trouvé, on prépare un message d'erreur affiché au visiteur.
             $error = 'Identifiants incorrects.';
         }
 
-        // Affiche la vue de connexion avec un éventuel message d'erreur.
+        // Affiche le template de connexion.
+        // La vue reçoit le message d'erreur s'il y en a un, sinon elle affiche le formulaire proprement.
         return $this->render('/login.html.twig', [
             'error' => $error,
         ]);
@@ -70,14 +79,19 @@ final class AssuresController extends AbstractController
     #[Route('/logout', name: 'app_assures_logout')]
     public function logout(Request $request): Response
     {
+        // Cette action détruit uniquement la clé 'user' de la session.
+        // Elle ne détruit pas la session entière, mais elle invalide l'état de connexion.
         $request->getSession()->remove('user');
 
+        // Après la déconnexion, l'utilisateur est renvoyé vers la page de connexion.
         return $this->redirectToRoute('app_assures_login');
     }
 
     #[Route('/', name: 'app_root', methods: ['GET'])]
     public function root(Request $request): Response
     {
+        // La route racine redirige automatiquement selon l'état de session.
+        // C'est un point d'entrée simple qui choisit la page adéquate sans afficher de contenu.
         if ($request->getSession()->has('user')) {
             return $this->redirectToRoute('dashboard');
         }
@@ -88,21 +102,22 @@ final class AssuresController extends AbstractController
     #[Route('/calculnir', name: 'calculnir', methods: ['GET'])]
     public function calculNir(Request $request): Response
     {
-        // Point d'entrée pour la route calculnir.
-        // Cette méthode peut être étendue pour effectuer le calcul ou afficher un formulaire.
+        // Route de test accessible en GET.
+        // Actuellement, elle renvoie simplement un texte pour vérifier que la route fonctionne.
         return new Response('Route calculnir activée.');
     }
 
     #[Route('/dashboard', name: 'dashboard')]
     public function dashboard(Request $request, ChmListeRepository $chmListeRepository): Response
     {
-        // Bloque l'accès au tableau de bord si aucune session utilisateur n'est active.
+        // Vérifie l'état de connexion avant d'exposer le tableau de bord.
+        // Si l'utilisateur n'est pas connecté, il est renvoyé vers la page de login.
         if (!$request->getSession()->has('user')) {
             return $this->redirectToRoute('app_assures_login');
         }
 
-        // Collecte les filtres envoyés via la barre de recherche du tableau de bord.
-        // Chaque clé correspond à un critère de recherche disponible dans l'interface, permettant d'affiner les résultats affichés.
+        // Lit les paramètres de recherche dans la requête GET envoyée par le tableau de bord.
+        // Ces filtres permettent de restreindre l'ensemble des assurés affichés.
         $filters = [
             'nir' => $request->query->get('nir', ''),
             'macben' => $request->query->get('macben', ''),
@@ -113,17 +128,18 @@ final class AssuresController extends AbstractController
             'nirBnf' => $request->query->get('nirBnf', ''),
         ];
 
-        // Détermine si au moins un filtre a été saisi par l'utilisateur.
-        // array_filter supprime les valeurs vides afin d'identifier uniquement les critères réellement actifs.
+        // Vérifie si un ou plusieurs champs de filtre ont été renseignés.
+        // Ce test permet de choisir entre une recherche ciblée ou un affichage de tous les enregistrements.
         $hasFilters = array_filter($filters);
-        // Exécute une recherche filtrée si des critères sont fournis, sinon charge tous les résultats.
-        // Cette logique permet d'adapter la requête au contexte d'utilisation du tableau de bord.
+
+        // Utilise le repository pour renvoyer soit les résultats filtrés, soit l'ensemble des données.
+        // Cela limite la charge de la requête quand l'utilisateur cherche un cas précis.
         $results = $hasFilters
             ? $chmListeRepository->searchAssures($filters)
             : $chmListeRepository->findAllFordashboard();
 
-        // Transforme les données récupérées pour les adapter à la vue du tableau de bord.
-        // Cette étape complète les informations nécessaires à l'affichage en ajoutant des champs utiles à la vue.
+        // Prépare les données à envoyer au template.
+        // Pour chaque assuré récupéré, on ajoute des champs calculés utiles à l'affichage.
         $assures = array_map(function (array $assure): array {
             $assure['lieuNaissance'] = '';
             $assure['adresseComplete'] = $this->formatAdresseComplete($assure);
@@ -131,12 +147,11 @@ final class AssuresController extends AbstractController
             return $assure;
         }, $results);
 
-        // Récupère les informations utilisateur depuis la session pour l'affichage.
-        // Le nom et prénom sont ensuite transmis à la vue pour personnaliser l'interface.
+        // Récupère le nom de l'utilisateur connecté depuis la session.
+        // Ce nom est ensuite transmis à la vue pour personnaliser le tableau de bord.
         $user = $request->getSession()->get('user', []);
 
-        // Envoie les données préparées vers le template du tableau de bord.
-        // Les variables transmises à la vue sont utilisées par Twig pour construire la page HTML.
+        // Rend le template du tableau de bord avec les données d'assurés et le nom de l'utilisateur.
         return $this->render('/dashboard.html.twig', [
             'Assures' => $assures,
             'user' => [
@@ -148,18 +163,21 @@ final class AssuresController extends AbstractController
     private function formatAdresseComplete(array $assure): string
     {
         // Construit la partie voie de l'adresse à partir des informations disponibles.
+        // Si le type et le libellé de l'adresse existent, ils sont assemblés proprement.
         $voie = trim(implode(' ', array_filter([
             $assure['adresseType'] ?? null,
             $assure['adresseLibelle'] ?? null,
         ])));
 
         // Construit la partie ville et code postal de l'adresse.
+        // L'objectif est de former un bloc lisible pour l'utilisateur final.
         $ville = trim(implode(' ', array_filter([
             $assure['adresseCodePostal'] ?? null,
             $assure['adresseCommune'] ?? null,
         ])));
 
-        // Assemble les éléments de l'adresse en une chaîne lisible pour la vue.
+        // Assemble les différents éléments en une seule chaîne texte pour l'affichage.
+        // Si un segment est manquant, array_filter le supprime pour éviter les virgules superflues.
         return implode(', ', array_filter([
             $voie,
             $assure['adresseComplement'] ?? null,
