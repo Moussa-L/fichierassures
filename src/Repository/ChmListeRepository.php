@@ -30,7 +30,7 @@ class ChmListeRepository extends ServiceEntityRepository
     }
 
     // Récupère les données nécessaires pour le tableau de bord.
-    public function findAllForDashboard(int $limit = 1000): array
+    public function findAllFordashboard(int $limit = 1000): array
     {
         // Limite le nombre de lignes retournées pour éviter une surcharge mémoire.
         // La valeur est bornée entre 1 et 5000 pour garder une exécution stable.

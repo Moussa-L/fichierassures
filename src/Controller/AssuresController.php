@@ -22,7 +22,7 @@ final class AssuresController extends AbstractController
         // Si une session utilisateur existe, on redirige directement vers le tableau de bord.
         // Cela évite de demander une nouvelle connexion à un utilisateur déjà identifié et permet de conserver l'expérience utilisateur fluide.
         if ($session->has('user')) {
-            return $this->redirectToRoute('dashBoard');
+            return $this->redirectToRoute('dashboard');
         }
 
         // Variable utilisée pour afficher un message d'erreur en cas d'échec de connexion.
@@ -54,7 +54,7 @@ final class AssuresController extends AbstractController
                     'nom' => $user['Nom'],
                 ]);
 
-                return $this->redirectToRoute('dashBoard');
+                return $this->redirectToRoute('dashboard');
             }
 
             // Message affiché si les identifiants ne correspondent à aucun utilisateur.
@@ -62,7 +62,7 @@ final class AssuresController extends AbstractController
         }
 
         // Affiche la vue de connexion avec un éventuel message d'erreur.
-        return $this->render('premier_symfony/login.html.twig', [
+        return $this->render('/login.html.twig', [
             'error' => $error,
         ]);
     }
@@ -75,8 +75,26 @@ final class AssuresController extends AbstractController
         return $this->redirectToRoute('app_assures_login');
     }
 
-    #[Route('/dashboard', name: 'dashBoard')]
-    public function dashBord(Request $request, ChmListeRepository $chmListeRepository): Response
+    #[Route('/', name: 'app_root', methods: ['GET'])]
+    public function root(Request $request): Response
+    {
+        if ($request->getSession()->has('user')) {
+            return $this->redirectToRoute('dashboard');
+        }
+
+        return $this->redirectToRoute('app_assures_login');
+    }
+
+    #[Route('/calculnir', name: 'calculnir', methods: ['GET'])]
+    public function calculNir(Request $request): Response
+    {
+        // Point d'entrée pour la route calculnir.
+        // Cette méthode peut être étendue pour effectuer le calcul ou afficher un formulaire.
+        return new Response('Route calculnir activée.');
+    }
+
+    #[Route('/dashboard', name: 'dashboard')]
+    public function dashboard(Request $request, ChmListeRepository $chmListeRepository): Response
     {
         // Bloque l'accès au tableau de bord si aucune session utilisateur n'est active.
         if (!$request->getSession()->has('user')) {
@@ -102,7 +120,7 @@ final class AssuresController extends AbstractController
         // Cette logique permet d'adapter la requête au contexte d'utilisation du tableau de bord.
         $results = $hasFilters
             ? $chmListeRepository->searchAssures($filters)
-            : $chmListeRepository->findAllForDashboard();
+            : $chmListeRepository->findAllFordashboard();
 
         // Transforme les données récupérées pour les adapter à la vue du tableau de bord.
         // Cette étape complète les informations nécessaires à l'affichage en ajoutant des champs utiles à la vue.
@@ -119,7 +137,7 @@ final class AssuresController extends AbstractController
 
         // Envoie les données préparées vers le template du tableau de bord.
         // Les variables transmises à la vue sont utilisées par Twig pour construire la page HTML.
-        return $this->render('premier_symfony/dashboard.html.twig', [
+        return $this->render('/dashboard.html.twig', [
             'Assures' => $assures,
             'user' => [
                 'nomPrenom' => $user['nom'] ?? $user['login'] ?? 'Utilisateur',

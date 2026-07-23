@@ -47,9 +47,9 @@
         <div class="mx-auto mb-4" style="max-width: 980px;">
         <section class="card shadow-lg border-0 rounded-4">
             <div class="card-body">
-                {# Le formulaire envoie une requête HTTP GET vers la route nommée "dashBoard". Symfony construit l'adresse exacte de cette route grâce à path('dashBoard').
-                Cette route vient du contrôleur : src/Controller/AssuresController.php, ligne avec #[Route('/dashboard', name: 'dashBoard')]. Donc path('dashBoard') génère l'adresse exacte /dashboard automatiquement. #}
-                <form class="row g-3" method="GET" action="{{ path('dashBoard') }}">
+                {# Le formulaire envoie une requête HTTP GET vers la route nommée "dashboard". Symfony construit l'adresse exacte de cette route grâce à path('dashboard').
+                Cette route vient du contrôleur : src/Controller/AssuresController.php, ligne avec #[Route('/dashboard', name: 'dashboard')]. Donc path('dashboard') génère l'adresse exacte /dashboard automatiquement. #}
+                <form class="row g-3" method="GET" action="{{ path('dashboard') }}">
                     <div class="col-md-4">
                         <label class="form-label">NIR</label>
                         {# inspecte le paramètre GET 'nir' de la requête HTTP courante et le réinjecte dans le champ. #}
@@ -87,7 +87,7 @@
                     </div> #}
                     <div class="col-12 d-flex gap-2">
                         <button type="submit" class="btn btn-primary">Rechercher</button>
-                        <a href="{{ path('dashBoard') }}" class="btn btn-outline-secondary">Réinitialiser</a>
+                        <a href="{{ path('dashboard') }}" class="btn btn-outline-secondary">Réinitialiser</a>
                     </div>
                 </form>
             </div>
