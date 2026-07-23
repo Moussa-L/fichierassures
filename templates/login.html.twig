@@ -10,25 +10,28 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </head>
 
-    <body style="margin: 0; min-height: 100vh; background-image: url('{{ asset('images/CSSM PETALES.png') }}'); background-size: 1200px; background-position: unset; background-repeat: no-repeat;">
+    <body style="margin: 0; min-height: 100vh; background-image: url('{{ asset('images/CSSM PETALES.png') }}'); background-size: 830px; background-position: left 320px; background-repeat: no-repeat;">
 
        
 
         <div class="min-vh-100 d-flex flex-column justify-content-center" style="padding-top: 5px; margin-top: -25px;">
 
-            <div class="ensembleElem">
+           
 
-                <div class="text-center px-3" style="margin-top: -170px;">
-                    <h1 class="mb-2">Caisse de Sécurité Sociale de Mayotte</h1>
-                    <h3>Bienvenue dans Fichier des Assurés</h3>
-                </div>
+               
 
                 <main class="container mt-5">
+                
                 <div class="row justify-content-center">
-                    <div class="col-md-5">
-                        <h1 class="text-center mb-4">Connexion</h1>
+                 
+                    <div class="col-md-5 classTransForm">
+                       
+                            <h1 class="mb-2 classP1">Caisse de Sécurité Sociale de Mayotte</h1>
+                            <h3 class="classP2">Bienvenue dans Fichier des Assurés</h3>
+                        
+                        <h1 class="text-center mb-4 login-title">Connexion</h1>
 
-                        <form class="card p-4 shadow-sm" method="post" action="{{ path('app_assures_login') }}">
+                        <form class="card p-4 shadow-sm login-card glass-panel classFormId" method="post" action="{{ path('app_assures_login') }}">
                             {% if error %}
                                 <div class="alert alert-danger" role="alert">
                                     {{ error }}
@@ -37,12 +40,13 @@
 
                             <div class="mb-3">
                                 <label for="login" class="form-label">Identifiant </label>
-                                <input id="login" type="text" name="login" class="form-control" required>
+                                <input id="login" type="text" name="login" class="form-control ClassInput" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Mot de passe</label>
-                                <input id="password" type="password" name="password" class="form-control" required>
+                                <input id="password" type="password" name="password" class="form-control ClassInput" required>
+      
                             </div>
 
                             <button type="submit" class="btn btn-primary w-100">
@@ -53,6 +57,6 @@
                 </div>
                 </main>
             </div>
-        </div>
+        
     </body>
 </html>

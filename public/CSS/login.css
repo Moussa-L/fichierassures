@@ -1,2 +1,33 @@
 
+.classTransForm{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 20px;
+    margin: 20px;
+    background-color: rgba(91,110,207,0.15);
+    border-radius: 5px;
+}
 
+.classFormId{
+    background-color: rgba(86,97,153,0.15);
+    border: none;
+}
+
+.classP1{
+    font-size: 29px;
+    font-family: revert;
+    color: darkblue;
+    text-align: center;
+}
+
+.classP2{
+    font-size: 29px;
+    font-family: revert;
+    color: rgba(113,118,94,0.748);
+    text-align: center;
+}
+
+.ClassInput{
+    background-color: rgba(94,76,133,0.2);
+}
+
+  
