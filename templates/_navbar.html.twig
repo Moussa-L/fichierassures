@@ -1,0 +1,26 @@
+<nav class="navbar navbar-light bg-white shadow-sm sticky-top">
+    <div class="container-fluid px-4">
+        <a class="navbar-brand d-flex align-items-center" href="{{ path('dashboard') }}">
+            <img src="{{ asset('images/Logo-CSSM.png') }}" alt="Logo" width="55" height="35" class="d-inline-block align-top logo-dashboard">
+        </a>
+        <div class="d-flex align-items-center gap-4">
+            <div class="nav-item">
+                <a class="nav-link text-dark fw-semibold" href="{{ path('dashboard') }}">Accueil</a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-dark fw-semibold" href="{{ path('calculnir') }}">Calcul Clé NIR</a>
+            </div>
+            <div class="nav-item d-flex align-items-center gap-2">
+                <a class="nav-link text-dark fw-semibold" href="#">
+                    <i class="bi bi-person-fill icone-profil"></i>
+                    {{ user.nomPrenom ?? 'Utilisateur' }}
+                </a>
+            </div>
+            <div class="nav-item">
+                <a class="nav-link text-dark" href="{{ path('app_assures_logout') }}" title="Déconnexion">
+                    <i class="bi bi-power icone-power"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

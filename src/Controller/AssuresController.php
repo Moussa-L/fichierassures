@@ -103,7 +103,7 @@ final class AssuresController extends AbstractController
     public function calculNir(Request $request): Response
     {
         // Route accessible en GET.
-        // Elle affiche désormais le template dédié au calcul NIR.
+        // Elle affiche le template dédié au calcul NIR.
         return $this->render('calculNir.html.twig');
     }
 
