@@ -1,2 +1,56 @@
+body {
+    margin: 0;
+}
+
+.login-page {
+    min-height: 100vh;
+    background-image: url('../images/CSSM PETALES.png');
+    background-size: 850px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #eef6ff;
+}
+
+.login-shell {
+    padding-top: 5px;
+    margin-top: -25px;
+}
+
+.ensembleElem {
+    width: 100%;
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.login-hero {
+    max-width: 900px;
+    margin: 0 auto 1.5rem auto;
+    padding: 1.25rem 1.5rem;
+    border-radius: 1rem;
+}
+
+.login-hero h1,
+.login-hero h3,
+.login-title {
+    color: #0b3b6f;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+.login-card {
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.78);
+}
+
+.login-card .form-control {
+    background: rgba(255, 255, 255, 0.9);
+}
 
 
