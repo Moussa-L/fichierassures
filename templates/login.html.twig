@@ -22,14 +22,14 @@
 
                 <main class="container mt-5">
                 
-                <div class="row justify-content-center">
-                 
+                <div class="row justify-content-center classEnsemb">
+                 <h3 class="classP1">Bienvenue dans Fichier des Assurés</h3>
                     <div class="col-md-5 classTransForm">
                        
-                            <h1 class="mb-2 classP1">Caisse de Sécurité Sociale de Mayotte</h1>
-                            <h3 class="classP2">Bienvenue dans Fichier des Assurés</h3>
+                            <img src="{{ asset('images/Logo-CSSM.png') }}" alt="Logo CSSM" width="250" height="120" class="logoCssm">
+                            
                         
-                        <h1 class="text-center mb-4 login-title">Connexion</h1>
+                        <h1 class="text-center classP2 mb-4 login-title">Connexion</h1>
 
                         <form class="card p-4 shadow-sm login-card glass-panel classFormId" method="post" action="{{ path('app_assures_login') }}">
                             {% if error %}

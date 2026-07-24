@@ -15,8 +15,9 @@
 .classP1{
     font-size: 29px;
     font-family: revert;
-    color: darkblue;
+    color: rgba(59, 48, 144, 0.651);
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .classP2{
@@ -30,4 +31,12 @@
     background-color: rgba(94,76,133,0.2);
 }
 
-  
+img{
+    display: block;
+    margin: auto;
+    padding-bottom: 20px;
+}
+
+.classEnsemb{
+    padding-bottom: 100px;
+}
